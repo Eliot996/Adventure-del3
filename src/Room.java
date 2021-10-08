@@ -41,6 +41,15 @@ public class Room {
         return "You cannot seem to find any items in this room";
     }
 
+    public Item getItemFromName(String itemName) {
+        for (Item item : itemsInRoom) {
+            if (item.getShortName().equalsIgnoreCase(itemName)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Item> getItemsInRoom() {
         return itemsInRoom;
     }

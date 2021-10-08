@@ -69,20 +69,19 @@ public class Player {
     // 1: successful transfer
     // 0: item is to heavy
     // -1: item was no found
-    public Enum<StatusCode> takeItem(String itemName) {
-        for (Item item : currentRoom.getItemsInRoom()) {
-            if (item.getShortName().equalsIgnoreCase(itemName)) {
-                if (weight + item.getWeight() <= weightLimit) {
-                    currentRoom.removeItem(item);
-                    itemsInInventory.add(item);
-                    weight += item.getWeight();
-                    return StatusCode.SUCCESS;
-                } else {
-                    return StatusCode.FAIL;
-                }
+    public Enum<StatusCode> takeItem(Item item) {
+        if (item != null) {
+            if (weight + item.getWeight() <= weightLimit) {
+                currentRoom.removeItem(item);
+                itemsInInventory.add(item);
+                weight += item.getWeight();
+                return StatusCode.SUCCESS;
+            } else {
+              return StatusCode.FAIL;
             }
+        } else {
+            return StatusCode.DOES_NOT_EXIST;
         }
-        return StatusCode.DOES_NOT_EXIST;
     }
 
     public Item getItemFromName(String itemName) {

@@ -64,35 +64,31 @@ public class Adventure {
             }else
 
                 if (userInput.startsWith("take ")){
-                userInput = userInput.substring(5);
+                    // cut excess from userInput, in order to simplify commands
+                    userInput = userInput.substring(5);
 
-                Enum<StatusCode> success = player.takeItem(userInput);
-                //ArrayList<Item> playerItems = player.getItemsInInventory();
+                    // get the item from the room the player is currently in
+                    Item tmpItem = player.getCurrentRoom().getItemFromName(userInput);
 
-                if (success == StatusCode.SUCCESS) {
-                    System.out.println("You have taken " + userInput);
-                }if (success == StatusCode.FAIL){
+                    // take item and get StatusCode
+                    Enum<StatusCode> statusCode = player.takeItem(tmpItem);
+
+                    // depending on the statuscode the user will get the right respons
+                    if (statusCode == StatusCode.SUCCESS) {
+                        System.out.println("You have taken " + userInput);
+                    }if (statusCode == StatusCode.FAIL){
                         System.out.println("This item will exceed your weight limit, " +
                                 "please drop an item from your inventory if you wish to take this item.");
-                }if (success == StatusCode.DOES_NOT_EXIST){
+                    }if (statusCode == StatusCode.DOES_NOT_EXIST){
                         System.out.println("You cannot find that item");
-                    }//else
-                       /* if(userInput.startsWith("eat ")){
-                            userInput = userInput.substring(4);
-                            Enum<ItemSuccess> success2 = player.takeItem(userInput);
-
-                            if(){
-
-                            }
-                        }*/
-
+                    }
             }else
 
                 if (userInput.startsWith("drop ")){
                     // cut excess from userInput, in order to simplify commands
                     userInput = userInput.substring(5);
 
-                    // get the item from the item from the players inventory,
+                    // get the item from the players inventory,
                     Item tmpItem = player.getItemFromName(userInput);
 
                     // drop the item from player inventory, and get statuscode
