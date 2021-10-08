@@ -1,9 +1,15 @@
+import java.util.ArrayList;
+
 public class Enemy {
+
+    // TODO: 08/10/2021 add functionality to Class, like dies, drop items, attact,
+    //  wrether or not the enemy will attact on sight, should the enemy move around?
 
     private String name;
     private int health;
     private Item weapon;
     private Room currentRoom;
+    private ArrayList<Item> inventory = new ArrayList<>();
 
     public Enemy(String name, int health, Item weapon, Room currentRoom) {
         this.name = name;
