@@ -82,6 +82,22 @@ public class Player {
         }
     }
 
+    public Enum<StatusCode> eatItem(Item item){
+        if(item != null) {
+
+            if (item instanceof Food) {
+                HP += ((Food) item).getHealth();
+                itemsInInventory.remove(item);
+                return StatusCode.SUCCESS;
+                }else {
+                return StatusCode.FAIL;
+            }
+        }else {
+            return StatusCode.DOES_NOT_EXIST;
+        }
+
+    }
+
     public Item getItemFromName(String itemName) {
         for (Item item : itemsInInventory) {
             if (item.getShortName().equalsIgnoreCase(itemName)) {

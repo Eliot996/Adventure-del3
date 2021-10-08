@@ -48,15 +48,16 @@ public class Adventure {
                 energyUpdate(-5);
                 System.out.println(player.goTo(userInput));
 
-            } else if (userInput.startsWith("exit") || userInput.startsWith("e")) {
+                if (userInput.startsWith("exit")){
                 System.out.println(Color.BRIGHT_RED + "Leaving already? :(");
                 System.out.println("Hopefully we'll see each other again :) ");
                 gameActive = false;
 
             } else if (userInput.startsWith("look") || userInput.startsWith("l")) {
                 System.out.println(look());
+            }else
 
-            } else if (userInput.startsWith("help") || userInput.startsWith("h")) {
+                if (userInput.startsWith("help")){
                 System.out.println(helpPlayer());
 
             } else if (userInput.startsWith("info")) {
@@ -72,17 +73,29 @@ public class Adventure {
                 // take item and get StatusCode
                 Enum<StatusCode> statusCode = player.takeItem(tmpItem);
 
-                // depending on the statuscode the user will get the right respons
-                if (statusCode == StatusCode.SUCCESS) {
-                    System.out.println("You have taken " + tmpItem.getShortName());
-                }
-                if (statusCode == StatusCode.FAIL) {
-                    System.out.println("This item will exceed your weight limit, " +
-                            "please drop an item from your inventory if you wish to take this item.");
-                }
-                if (statusCode == StatusCode.DOES_NOT_EXIST) {
-                    System.out.println("You cannot find that item");
-                }
+                    // depending on the statuscode the user will get the right respons
+                    if (statusCode == StatusCode.SUCCESS) {
+                        System.out.println("You have taken " + tmpItem.getShortName());
+                    }if (statusCode == StatusCode.FAIL){
+                        System.out.println("This item will exceed your weight limit, " +
+                                "please drop an item from your inventory if you wish to take this item.");
+                    }if (statusCode == StatusCode.DOES_NOT_EXIST){
+                        System.out.println("You cannot find that item");
+                    }
+                    }else
+                       if(userInput.startsWith("eat ")){
+                            userInput = userInput.substring(4);
+                            Item tempItem = player.getItemFromName(userInput);
+                            Enum<StatusCode> success2 = player.eatItem(tempItem);
+
+                            if(success2 == StatusCode.SUCCESS){
+                                System.out.println("you have eaten " + tempItem.getShortName());
+                            }if(success2 == StatusCode.FAIL){
+                               System.out.println("You cannot eat that item");
+                           }if(success2 == StatusCode.DOES_NOT_EXIST){
+                               System.out.println("That item does not exist");
+                           }
+                        }else
 
             } else if (userInput.startsWith("drop ")) {
                 // cut excess from userInput, in order to simplify commands
