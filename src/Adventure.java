@@ -67,17 +67,25 @@ public class Adventure {
                 if (userInput.startsWith("take ")){
                 userInput = userInput.substring(5);
 
-                int status = player.takeItem(userInput);
-                ArrayList<Item> playerItems = player.getItemsInInventory();
+                Enum<ItemSuccess> success = player.takeItem(userInput);
+                //ArrayList<Item> playerItems = player.getItemsInInventory();
 
-                if (status == 1) {
-                    System.out.println("You have taken " + playerItems.get(playerItems.size() - 1).getShortName());
-                }if (status == 0){
+                if (success == ItemSuccess.SUCCESS) {
+                    System.out.println("You have taken " + userInput);
+                }if (success == ItemSuccess.FAIL){
                         System.out.println("This item will exceed your weight limit, " +
                                 "please drop an item from your inventory if you wish to take this item.");
-                }if (status == -1){
+                }if (success == ItemSuccess.DOES_NOT_EXIST){
                         System.out.println("You cannot find that item");
-                    }
+                    }//else
+                       /* if(userInput.startsWith("eat ")){
+                            userInput = userInput.substring(4);
+                            Enum<ItemSuccess> success2 = player.takeItem(userInput);
+
+                            if(){
+
+                            }
+                        }*/
 
             }else
 
