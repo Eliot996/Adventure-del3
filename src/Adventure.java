@@ -96,14 +96,14 @@ public class Adventure {
                     Item tmpItem = player.getItemFromName(userInput);
 
                     // drop the item from player inventory, and get statuscode
-                    Enum<StatusCode> StatusCode = player.dropItem(tmpItem);
+                    Enum<StatusCode> statusCode = player.dropItem(tmpItem);
 
                     // depending on the statuscode the user will get the right respons
-                    if (StatusCode == StatusCode.SUCCESS) {
+                    if (statusCode == StatusCode.SUCCESS) {
                         System.out.println("You have dropped " + tmpItem.getShortName());
-                    } else if (StatusCode == StatusCode.FAIL){
+                    } else if (statusCode == StatusCode.FAIL){
                         System.out.println("That is not possible");
-                    } else {
+                    } else if (statusCode == StatusCode.DOES_NOT_EXIST){
                         System.out.println("I cannot find an item by that name in your inventory");
                     }
             }else
