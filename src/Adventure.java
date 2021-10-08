@@ -45,7 +45,7 @@ public class Adventure {
                 System.out.println(player.goTo(userInput));
             }else
 
-                if (userInput.startsWith("exit") || userInput.startsWith("e")){
+                if (userInput.startsWith("exit")){
                 System.out.println(Color.BRIGHT_RED + "Leaving already? :(");
                 System.out.println("Hopefully we'll see each other again :) ");
                 gameActive = false;
@@ -55,7 +55,7 @@ public class Adventure {
                 System.out.println(look());
             }else
 
-                if (userInput.startsWith("help") || userInput.startsWith("h")){
+                if (userInput.startsWith("help")){
                 System.out.println(helpPlayer());
             }else
 
@@ -82,7 +82,20 @@ public class Adventure {
                     }if (statusCode == StatusCode.DOES_NOT_EXIST){
                         System.out.println("You cannot find that item");
                     }
-            }else
+                    }else
+                       if(userInput.startsWith("eat ")){
+                            userInput = userInput.substring(4);
+                            Item tempItem = player.getItemFromName(userInput);
+                            Enum<StatusCode> success2 = player.eatItem(tempItem);
+
+                            if(success2 == StatusCode.SUCCESS){
+                                System.out.println("you have eaten " + tempItem.getShortName());
+                            }if(success2 == StatusCode.FAIL){
+                               System.out.println("You cannot eat that item");
+                           }if(success2 == StatusCode.DOES_NOT_EXIST){
+                               System.out.println("That item does not exist");
+                           }
+                        }else
 
                 if (userInput.startsWith("drop ")){
                     // cut excess from userInput, in order to simplify commands
