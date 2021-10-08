@@ -43,21 +43,21 @@ public class Adventure {
             }
 
             String userInput = input.nextLine().trim().toLowerCase();
+
             if (userInput.startsWith("go ")) {
                 userInput = userInput.substring(3);
                 energyUpdate(-5);
                 System.out.println(player.goTo(userInput));
 
-                if (userInput.startsWith("exit")){
+            } else if (userInput.startsWith("exit")){
                 System.out.println(Color.BRIGHT_RED + "Leaving already? :(");
                 System.out.println("Hopefully we'll see each other again :) ");
                 gameActive = false;
 
             } else if (userInput.startsWith("look") || userInput.startsWith("l")) {
                 System.out.println(look());
-            }else
 
-                if (userInput.startsWith("help")){
+            }else if (userInput.startsWith("help")){
                 System.out.println(helpPlayer());
 
             } else if (userInput.startsWith("info")) {
@@ -82,22 +82,22 @@ public class Adventure {
                     }if (statusCode == StatusCode.DOES_NOT_EXIST){
                         System.out.println("You cannot find that item");
                     }
-                    }else
-                       if(userInput.startsWith("eat ")){
-                            userInput = userInput.substring(4);
-                            Item tempItem = player.getItemFromName(userInput);
-                            Enum<StatusCode> success2 = player.eatItem(tempItem);
 
-                            if(success2 == StatusCode.SUCCESS){
-                                System.out.println("you have eaten " + tempItem.getShortName());
-                            }if(success2 == StatusCode.FAIL){
-                               System.out.println("You cannot eat that item");
-                           }if(success2 == StatusCode.DOES_NOT_EXIST){
-                               System.out.println("That item does not exist");
-                           }
-                        }else
+                }else if(userInput.startsWith("eat ")){
 
-            } else if (userInput.startsWith("drop ")) {
+                    userInput = userInput.substring(4);
+                    Item tempItem = player.getItemFromName(userInput);
+                    Enum<StatusCode> success2 = player.eatItem(tempItem);
+
+                    if(success2 == StatusCode.SUCCESS){
+                        System.out.println("you have eaten " + tempItem.getShortName());
+                    }if(success2 == StatusCode.FAIL){
+                        System.out.println("You cannot eat that item");
+                    }if(success2 == StatusCode.DOES_NOT_EXIST){
+                        System.out.println("That item does not exist");
+                    }
+                }
+                else if (userInput.startsWith("drop ")) {
                 // cut excess from userInput, in order to simplify commands
                 userInput = userInput.substring(5);
 
@@ -137,6 +137,8 @@ public class Adventure {
                     player.attack(tempEnemy);
                     System.out.println("enemy health: "+ tempEnemy.getHealth());
                 }
+
+                // TODO: 08/10/2021 add equip item to commands
 
             } else {
                 System.out.println("I don't understand that. Please try again :)");
