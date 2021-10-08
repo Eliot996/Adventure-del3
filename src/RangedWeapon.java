@@ -5,4 +5,8 @@ public class RangedWeapon extends Weapon{
         super(shortName, longName, description, weight);
     }
 
+    public void attack(Enemy enemy){
+
+    }
+
 }

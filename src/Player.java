@@ -9,10 +9,11 @@ public class Player {
     private final int weightLimit = 25;
     private int energy = 100;
     private final ArrayList<Item> itemsInInventory = new ArrayList<>();
+    private Weapon equippedWeapon;
 
     public Player() {
         this.HP = maxHP;
-
+        this.equippedWeapon = new MeleeWeapon("sword", "short sword", "a short sword", 5, 10);
     }
 
     public String goTo(String userInput) {
@@ -66,9 +67,6 @@ public class Player {
     }
 
     // Checks if item is in the current room, and then if the item will be too heavy in the inventory.
-    // 1: successful transfer
-    // 0: item is to heavy
-    // -1: item was no found
     public Enum<StatusCode> takeItem(Item item) {
         if (item != null) {
             if (weight + item.getWeight() <= weightLimit) {
@@ -91,6 +89,10 @@ public class Player {
             }
         }
         return null;
+    }
+
+    public void attack(Enemy enemy){
+        equippedWeapon.attack(enemy);
     }
 
     public ArrayList<Item> getItemsInInventory() {
