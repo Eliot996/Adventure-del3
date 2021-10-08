@@ -82,14 +82,19 @@ public class Adventure {
             }else
 
                 if (userInput.startsWith("drop ")){
+                    // cut excess from userInput, in order to simplify commands
                     userInput = userInput.substring(5);
 
+                    // get the item from the item from the players inventory,
+                    Item tmpItem = player.getItemFromName(userInput);
 
-                    Enum<ItemSuccess> successRate = player.dropItem(userInput);
+                    // drop the item from player inventory, and get statuscode
+                    Enum<ItemSuccess> StatusCode = player.dropItem(tmpItem);
 
-                    if (successRate == ItemSuccess.SUCCESS) {
-                        System.out.println("You have dropped " + userInput);
-                    } else if (successRate == ItemSuccess.FAIL){
+                    // depending on the statuscode the user will get the right respons
+                    if (StatusCode == ItemSuccess.SUCCESS) {
+                        System.out.println("You have dropped " + tmpItem.getShortName());
+                    } else if (StatusCode == ItemSuccess.FAIL){
                         System.out.println("That is not possible");
                     } else {
                         System.out.println("I cannot find an item by that name in your inventory");
