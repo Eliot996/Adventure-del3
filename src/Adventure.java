@@ -75,7 +75,7 @@ public class Adventure {
 
                     // depending on the statuscode the user will get the right respons
                     if (statusCode == StatusCode.SUCCESS) {
-                        System.out.println("You have taken " + userInput);
+                        System.out.println("You have taken " + tmpItem.getShortName());
                     }if (statusCode == StatusCode.FAIL){
                         System.out.println("This item will exceed your weight limit, " +
                                 "please drop an item from your inventory if you wish to take this item.");
