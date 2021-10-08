@@ -56,33 +56,33 @@ public class Player {
     }
 
     // drops item from user inventory and adds it to the current room, as well as subtracts the weight of the item from players weight
-    public Enum<ItemSuccess> dropItem(Item item) {
+    public Enum<StatusCode> dropItem(Item item) {
         if (item != null){
             itemsInInventory.remove(item);
             currentRoom.addItem(item);
-            return ItemSuccess.SUCCESS;
+            return StatusCode.SUCCESS;
         }
-        return ItemSuccess.DOES_NOT_EXIST;
+        return StatusCode.DOES_NOT_EXIST;
     }
 
     // Checks if item is in the current room, and then if the item will be too heavy in the inventory.
     // 1: successful transfer
     // 0: item is to heavy
     // -1: item was no found
-    public Enum<ItemSuccess> takeItem(String itemName) {
+    public Enum<StatusCode> takeItem(String itemName) {
         for (Item item : currentRoom.getItemsInRoom()) {
             if (item.getShortName().equalsIgnoreCase(itemName)) {
                 if (weight + item.getWeight() <= weightLimit) {
                     currentRoom.removeItem(item);
                     itemsInInventory.add(item);
                     weight += item.getWeight();
-                    return ItemSuccess.SUCCESS;
+                    return StatusCode.SUCCESS;
                 } else {
-                    return ItemSuccess.FAIL;
+                    return StatusCode.FAIL;
                 }
             }
         }
-        return ItemSuccess.DOES_NOT_EXIST;
+        return StatusCode.DOES_NOT_EXIST;
     }
 
     public Item getItemFromName(String itemName) {

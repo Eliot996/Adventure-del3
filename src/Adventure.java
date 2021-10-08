@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Adventure {
@@ -67,15 +66,15 @@ public class Adventure {
                 if (userInput.startsWith("take ")){
                 userInput = userInput.substring(5);
 
-                Enum<ItemSuccess> success = player.takeItem(userInput);
+                Enum<StatusCode> success = player.takeItem(userInput);
                 //ArrayList<Item> playerItems = player.getItemsInInventory();
 
-                if (success == ItemSuccess.SUCCESS) {
+                if (success == StatusCode.SUCCESS) {
                     System.out.println("You have taken " + userInput);
-                }if (success == ItemSuccess.FAIL){
+                }if (success == StatusCode.FAIL){
                         System.out.println("This item will exceed your weight limit, " +
                                 "please drop an item from your inventory if you wish to take this item.");
-                }if (success == ItemSuccess.DOES_NOT_EXIST){
+                }if (success == StatusCode.DOES_NOT_EXIST){
                         System.out.println("You cannot find that item");
                     }//else
                        /* if(userInput.startsWith("eat ")){
@@ -97,12 +96,12 @@ public class Adventure {
                     Item tmpItem = player.getItemFromName(userInput);
 
                     // drop the item from player inventory, and get statuscode
-                    Enum<ItemSuccess> StatusCode = player.dropItem(tmpItem);
+                    Enum<StatusCode> StatusCode = player.dropItem(tmpItem);
 
                     // depending on the statuscode the user will get the right respons
-                    if (StatusCode == ItemSuccess.SUCCESS) {
+                    if (StatusCode == StatusCode.SUCCESS) {
                         System.out.println("You have dropped " + tmpItem.getShortName());
-                    } else if (StatusCode == ItemSuccess.FAIL){
+                    } else if (StatusCode == StatusCode.FAIL){
                         System.out.println("That is not possible");
                     } else {
                         System.out.println("I cannot find an item by that name in your inventory");
