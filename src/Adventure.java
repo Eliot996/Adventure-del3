@@ -83,7 +83,17 @@ public class Adventure {
 
                 if (userInput.startsWith("drop ")){
                     userInput = userInput.substring(5);
-                    System.out.println("You have dropped " + player.dropItem(userInput).getShortName());
+
+
+                    Enum<ItemSuccess> successRate = player.dropItem(userInput);
+
+                    if (successRate == ItemSuccess.SUCCESS) {
+                        System.out.println("You have dropped " + userInput);
+                    } else if (successRate == ItemSuccess.FAIL){
+                        System.out.println("That is not possible");
+                    } else {
+                        System.out.println("I cannot find an item by that name in your inventory");
+                    }
             }else
 
                 if (userInput.startsWith("inventory") || userInput.startsWith("inv") || userInput.startsWith("i")) {
