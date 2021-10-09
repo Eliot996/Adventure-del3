@@ -170,32 +170,21 @@ public class Adventure {
         return "There is no item by that name in your inventory";
     }
 
-   /* //Updates energyUpdate with 25 points.
-    public void takeABreak() { // TODO: 08/10/2021 move to Player
-        energyUpdate(25);
-    }*/
-
-    /*//Updates player energy
-    // TODO: 08/10/2021 move to Player
-    public void energyUpdate(int energyUpdate) {
-        int energy = player.getEnergy();
-        energy += energyUpdate;
-        player.setEnergy(energy);
-    }*/
-
     public String helpPlayer() { // TODO: 08/10/2021 update to include new commands
         return Color.BRIGHT_GREEN + """
                  Here is some help for you. Hopefully this will make your journey easier:
                  1) To move in and out of different rooms, combine 'go' with a direction,
                     such as north, south, east or west, or simply use the starting letter of the direction.
                  2) Type 'look' or 'l', to get a description of the room you are in.
-                 3) Type 'exit' or 'e', to end the game.
+                 3) Type 'exit', to end the game.
                  4) Type 'info', to get player information.
                  5) Type 'take', to add an item to your inventory.
                  6) Type 'drop', to drop an item from your inventory.
                  7) Type 'inventory' or 'inv', to see the list of items that you've collected.
                  8) Type 'inspect', to get a description of the item.
                  9) Type 'break' or 'b', to take a break.
+                 10) Type 'health', to see your health information.
+                 11) Type 'attack', to attack to attack enemies.
                  I wish you the best of luck!
                  XOXO, Gossip girl \uD83D\uDE09
                 """;
