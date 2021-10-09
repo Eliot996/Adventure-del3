@@ -127,7 +127,7 @@ public class Map {
 
 
         //Added different items to different rooms
-        map[0].addItem(new Food("flashlight", "old ass flashlight", "This will light up your world like nothing else", 7, 1));
+        map[0].addItem(new Item("flashlight", "old ass flashlight", "This will light up your world like nothing else", 7));
         map[7].addItem(new Item("pillow", "a soft and fluffy pillow", "This pillow is so fluffy i'm gonna die", 5));
         map[22].addItem(new Item("peberspray", "a small can of peberspray", "This is gonna burn.", 3));
         map[6].addItem(new Item("club", "an oak club", "This club is your only defence XD", 7));

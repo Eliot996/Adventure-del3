@@ -87,6 +87,9 @@ public class Player {
 
             if (item instanceof Food) {
                 HP += ((Food) item).getHealth();
+                if(HP > maxHP){
+                    HP = 50;
+                }
                 itemsInInventory.remove(item);
                 return StatusCode.SUCCESS;
                 }else {
