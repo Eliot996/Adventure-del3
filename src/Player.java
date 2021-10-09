@@ -118,6 +118,10 @@ public class Player {
         return itemsInInventory;
     }
 
+    public String health() { // TODO: 08/10/2021 move to Player
+        return "Health: \t" + getHP() + "/" + getMaxHP();
+    }
+
     public int getHP() {
         return HP;
     }

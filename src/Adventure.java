@@ -127,7 +127,7 @@ public class Adventure {
                 takeABreak();
 
             } else if (userInput.startsWith("health")) {
-                System.out.println(health());
+                System.out.println(player.health());
 
             }else if (userInput.startsWith("attack ")) { // TODO: 08/10/2021 add functionality to command
                 userInput = userInput.substring(7);
@@ -168,10 +168,6 @@ public class Adventure {
         }
 
         return "There is no item by that name in your inventory";
-    }
-
-    public String health() { // TODO: 08/10/2021 move to Player
-        return "Health: \t" + player.getHP() + "/" + player.getMaxHP();
     }
 
     //Updates energyUpdate with 25 points.
