@@ -118,8 +118,20 @@ public class Player {
         return itemsInInventory;
     }
 
-    public String health() { // TODO: 08/10/2021 move to Player
+    public String health() {
         return "Health: \t" + getHP() + "/" + getMaxHP();
+    }
+
+    //Updates energyUpdate with 25 points.
+    public void takeABreak() {
+        energyUpdate(25);
+    }
+
+    //Updates player energy
+    public void energyUpdate(int energyUpdate) {
+        int energy = getEnergy();
+        energy += energyUpdate;
+        setEnergy(energy);
     }
 
     public int getHP() {

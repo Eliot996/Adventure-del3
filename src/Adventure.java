@@ -46,7 +46,7 @@ public class Adventure {
 
             if (userInput.startsWith("go ")) {
                 userInput = userInput.substring(3);
-                energyUpdate(-5);
+                player.energyUpdate(-5);
                 System.out.println(player.goTo(userInput));
 
             } else if (userInput.startsWith("exit")){
@@ -124,7 +124,7 @@ public class Adventure {
                 System.out.println(inspect(userInput));
 
             } else if (userInput.startsWith("break") || userInput.startsWith("b")) {
-                takeABreak();
+                player.takeABreak();
 
             } else if (userInput.startsWith("health")) {
                 System.out.println(player.health());
@@ -170,18 +170,18 @@ public class Adventure {
         return "There is no item by that name in your inventory";
     }
 
-    //Updates energyUpdate with 25 points.
+   /* //Updates energyUpdate with 25 points.
     public void takeABreak() { // TODO: 08/10/2021 move to Player
         energyUpdate(25);
-    }
+    }*/
 
-    //Updates player energy
+    /*//Updates player energy
     // TODO: 08/10/2021 move to Player
     public void energyUpdate(int energyUpdate) {
         int energy = player.getEnergy();
         energy += energyUpdate;
         player.setEnergy(energy);
-    }
+    }*/
 
     public String helpPlayer() { // TODO: 08/10/2021 update to include new commands
         return Color.BRIGHT_GREEN + """
