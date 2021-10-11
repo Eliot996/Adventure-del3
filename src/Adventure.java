@@ -51,7 +51,7 @@ public class Adventure {
                 player.energyUpdate(-5);
                 System.out.println(player.goTo(userInput));
 
-            } else if (userInput.startsWith("exit")){
+            } else if (userInput.startsWith("exit")) {
                 System.out.println(Color.BRIGHT_RED + "Leaving already? :(");
                 System.out.println("Hopefully we'll see each other again :) ");
                 gameActive = false;
@@ -59,7 +59,7 @@ public class Adventure {
             } else if (userInput.startsWith("look") || userInput.startsWith("l")) {
                 System.out.println(look());
 
-            }else if (userInput.startsWith("help")){
+            } else if (userInput.startsWith("help")) {
                 System.out.println(helpPlayer());
 
             } else if (userInput.startsWith("info")) {
@@ -75,34 +75,34 @@ public class Adventure {
                 // take item and get StatusCode
                 Enum<StatusCode> statusCode = player.takeItem(tmpItem);
 
-                    // depending on the statuscode the user will get the right respons
-                    if (statusCode == StatusCode.SUCCESS) {
-                        System.out.println("You have taken " + tmpItem.getShortName());
-                    }else if (statusCode == StatusCode.FAIL){
-                        System.out.println("This item will exceed your weight limit, " +
-                                "please drop an item from your inventory if you wish to take this item.");
-                    }else if (statusCode == StatusCode.DOES_NOT_EXIST){
-                        System.out.println("You cannot find that item");
-                    }
+                // depending on the statuscode the user will get the right respons
+                if (statusCode == StatusCode.SUCCESS) {
+                    System.out.println("You have taken " + tmpItem.getShortName());
+                } else if (statusCode == StatusCode.FAIL) {
+                    System.out.println("This item will exceed your weight limit, " +
+                            "please drop an item from your inventory if you wish to take this item.");
+                } else if (statusCode == StatusCode.DOES_NOT_EXIST) {
+                    System.out.println("You cannot find that item");
+                }
 
-                }else if(userInput.startsWith("eat ")){
+            } else if (userInput.startsWith("eat ")) {
 
-                    //cut excess from userInput, in order to simplify commands
-                    userInput = userInput.substring(4);
+                //cut excess from userInput, in order to simplify commands
+                userInput = userInput.substring(4);
 
-                    //Eats item and get statusCode.
-                    Item tempItem = player.getItemFromName(userInput);
-                    Enum<StatusCode> success = player.eatItem(tempItem);
+                //Eats item and get statusCode.
+                Item tempItem = player.getItemFromName(userInput);
+                Enum<StatusCode> success = player.eatItem(tempItem);
 
-                    if(success == StatusCode.SUCCESS){
+                if (success == StatusCode.SUCCESS) {
                     //Gives correct response, depending on the statusCode.
-                        System.out.println("you have eaten " + tempItem.getShortName());
-                    }else if(success == StatusCode.FAIL){
-                        System.out.println("You cannot eat that item");
-                    }else if(success == StatusCode.DOES_NOT_EXIST){
-                        System.out.println("That item does not exist");
-                    }
-                }else if(userInput.startsWith("drink ")){
+                    System.out.println("you have eaten " + tempItem.getShortName());
+                } else if (success == StatusCode.FAIL) {
+                    System.out.println("You cannot eat that item");
+                } else if (success == StatusCode.DOES_NOT_EXIST) {
+                    System.out.println("That item does not exist");
+                }
+            } else if (userInput.startsWith("drink ")) {
 
                 //cut excess from userInput, in order to simplify commands.
                 userInput = userInput.substring(6);
@@ -112,16 +112,17 @@ public class Adventure {
                 Enum<StatusCode> success = player.eatItem(tempItem);
 
                 //Gives correct response, depending on the statusCode.
-                if(success == StatusCode.SUCCESS){
+                if (success == StatusCode.SUCCESS) {
                     System.out.println("you drank " + tempItem.getShortName());
-                }if(success == StatusCode.FAIL){
+                }
+                if (success == StatusCode.FAIL) {
                     System.out.println("You cannot drink that item");
-                }if(success == StatusCode.DOES_NOT_EXIST){
+                }
+                if (success == StatusCode.DOES_NOT_EXIST) {
                     System.out.println("That item does not exist");
                 }
 
-            }
-                else if (userInput.startsWith("drop ")) {
+            } else if (userInput.startsWith("drop ")) {
                 // cut excess from userInput, in order to simplify commands
                 userInput = userInput.substring(5);
 
@@ -154,13 +155,13 @@ public class Adventure {
             } else if (userInput.startsWith("health")) {
                 System.out.println(player.health());
 
-            }else if (userInput.startsWith("attack ")) { // TODO: 08/10/2021 add functionality to command
+            } else if (userInput.startsWith("attack ")) { // TODO: 08/10/2021 add functionality to command
                 userInput = userInput.substring(7);
 
                 Enemy tempEnemy = getEnemyFromName(userInput);
-                if (tempEnemy != null){
+                if (tempEnemy != null) {
                     player.attack(tempEnemy);
-                    System.out.println("enemy health: "+ tempEnemy.getHealth());
+                    System.out.println("enemy health: " + tempEnemy.getHealth());
                 }
 
             } else if (userInput.startsWith("equip ")) {
@@ -176,11 +177,11 @@ public class Adventure {
                 // depending on the statuscode the user will get the right respons
                 if (statusCode == StatusCode.SUCCESS) {
                     System.out.println("You have equipped " + tmpItem.getShortName());
-                }else if (statusCode == StatusCode.FAIL){
+                } else if (statusCode == StatusCode.FAIL) {
                     System.out.println("That item is not a weapon");
-                }else if (statusCode == StatusCode.SLOT_NOT_EMPTY){
+                } else if (statusCode == StatusCode.SLOT_NOT_EMPTY) {
                     System.out.println("You already have an item equipped");
-                }else if (statusCode == StatusCode.DOES_NOT_EXIST){
+                } else if (statusCode == StatusCode.DOES_NOT_EXIST) {
                     System.out.println("You cannot find an item by that name");
                 }
 
@@ -189,15 +190,16 @@ public class Adventure {
                 Enum<StatusCode> statusCodeEnum = player.unEquipWeapon();
 
                 // depending on the statuscode the user will get the right respons
-                if (statusCodeEnum == StatusCode.SUCCESS){
+                if (statusCodeEnum == StatusCode.SUCCESS) {
                     System.out.println("You have unequipped your weapon");
-                }else if (statusCodeEnum == StatusCode.FAIL){
+                } else if (statusCodeEnum == StatusCode.FAIL) {
                     System.out.println("You dont have a weapon equipped");
                 }
 
-            }else{
+            } else {
                 System.out.println("I don't understand that. Please try again :)");
             }
+
         }
     }
 
@@ -247,9 +249,9 @@ public class Adventure {
                 """;
     }
 
-    private Enemy getEnemyFromName(String enemyName){
+    private Enemy getEnemyFromName(String enemyName) {
         for (Enemy enemy : enemies) {
-            if (enemy.getName().equalsIgnoreCase(enemyName)){
+            if (enemy.getName().equalsIgnoreCase(enemyName)) {
                 return enemy;
             }
         }
