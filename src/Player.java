@@ -168,4 +168,43 @@ public class Player {
     public Room getCurrentRoom() {
         return currentRoom;
     }
+
+    public Enum<StatusCode> equipWeapon(Item tmpItem) {
+        // checks if there tmpItem contains an item
+        if(tmpItem != null) {
+
+            // checks if tmpItem has an item of type Weapon
+            if (tmpItem instanceof Weapon) {
+
+                // checks if equippedWeapon is empty
+                if (equippedWeapon == null){
+                    // if the slot is empty, add tmpItem to equippedWeapon and remove it from the inventory,
+                    // and return SUCCESS
+                    equippedWeapon = (Weapon) tmpItem;
+                    itemsInInventory.remove(tmpItem);
+
+                    return StatusCode.SUCCESS;
+                } else {
+                    // if the slot is not empty, return SLOT_NOT_EMPTY
+                    return StatusCode.SLOT_NOT_EMPTY;
+                }
+            }else {
+                // if tmpItem is of wrong type return FAIL
+                return StatusCode.FAIL;
+            }
+        }else {
+            // if tmpItem is empty, return DOES_NOT_EXIST
+            return StatusCode.DOES_NOT_EXIST;
+        }
+    }
+
+    public Enum<StatusCode> unEquipWeapon() {
+        if (equippedWeapon != null){
+            itemsInInventory.add(equippedWeapon);
+            equippedWeapon = null;
+            return StatusCode.SUCCESS;
+        } else {
+            return StatusCode.FAIL;
+        }
+    }
 }

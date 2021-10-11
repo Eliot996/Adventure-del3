@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Adventure {
 
-    private ArrayList<Enemy> enemies = new ArrayList();
+    private final ArrayList<Enemy> enemies = new ArrayList();
     private final Map mapOfGame;
     private final Player player;
     Scanner input = new Scanner(System.in);
@@ -76,10 +76,10 @@ public class Adventure {
                     // depending on the statuscode the user will get the right respons
                     if (statusCode == StatusCode.SUCCESS) {
                         System.out.println("You have taken " + tmpItem.getShortName());
-                    }if (statusCode == StatusCode.FAIL){
+                    }else if (statusCode == StatusCode.FAIL){
                         System.out.println("This item will exceed your weight limit, " +
                                 "please drop an item from your inventory if you wish to take this item.");
-                    }if (statusCode == StatusCode.DOES_NOT_EXIST){
+                    }else if (statusCode == StatusCode.DOES_NOT_EXIST){
                         System.out.println("You cannot find that item");
                     }
 
@@ -91,9 +91,9 @@ public class Adventure {
 
                     if(success2 == StatusCode.SUCCESS){
                         System.out.println("you have eaten " + tempItem.getShortName());
-                    }if(success2 == StatusCode.FAIL){
+                    }else if(success2 == StatusCode.FAIL){
                         System.out.println("You cannot eat that item");
-                    }if(success2 == StatusCode.DOES_NOT_EXIST){
+                    }else if(success2 == StatusCode.DOES_NOT_EXIST){
                         System.out.println("That item does not exist");
                     }
                 }else if(userInput.startsWith("drink ")){
@@ -154,9 +154,39 @@ public class Adventure {
                     System.out.println("enemy health: "+ tempEnemy.getHealth());
                 }
 
-                // TODO: 08/10/2021 add equip item to commands
+            } else if (userInput.startsWith("equip ")) {
+                // cut excess from userInput, in order to simplify commands
+                userInput = userInput.substring(6);
 
-            } else {
+                // get the item from the room the player is currently in
+                Item tmpItem = player.getItemFromName(userInput);
+
+                // take item and get StatusCode
+                Enum<StatusCode> statusCode = player.equipWeapon(tmpItem);
+
+                // depending on the statuscode the user will get the right respons
+                if (statusCode == StatusCode.SUCCESS) {
+                    System.out.println("You have equipped " + tmpItem.getShortName());
+                }else if (statusCode == StatusCode.FAIL){
+                    System.out.println("That item is not a weapon");
+                }else if (statusCode == StatusCode.SLOT_NOT_EMPTY){
+                    System.out.println("You already have an item equipped");
+                }else if (statusCode == StatusCode.DOES_NOT_EXIST){
+                    System.out.println("You cannot find an item by that name");
+                }
+
+            } else if (userInput.startsWith("unequip weapon")) {
+                // calls player.unEquipWeapon() and get StatusCode
+                Enum<StatusCode> statusCodeEnum = player.unEquipWeapon();
+
+                // depending on the statuscode the user will get the right respons
+                if (statusCodeEnum == StatusCode.SUCCESS){
+                    System.out.println("You have unequipped your weapon");
+                }else if (statusCodeEnum == StatusCode.FAIL){
+                    System.out.println("You dont have a weapon equipped");
+                }
+
+            }else{
                 System.out.println("I don't understand that. Please try again :)");
             }
         }
@@ -186,7 +216,7 @@ public class Adventure {
         return "There is no item by that name in your inventory";
     }
 
-    public String helpPlayer() { // TODO: 08/10/2021 update to include new commands
+    public String helpPlayer() { // TODO: 08/10/2021 update to include new commands: equip and unequip, eat, attack
         return Color.BRIGHT_GREEN + """
                  Here is some help for you. Hopefully this will make your journey easier:
                  1) To move in and out of different rooms, combine 'go' with a direction,
