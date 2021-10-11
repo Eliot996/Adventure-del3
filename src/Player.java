@@ -95,6 +95,7 @@ public class Player {
                 }
                 itemsInInventory.remove(item);
                 return StatusCode.SUCCESS;
+
                 }else {
                 return StatusCode.FAIL;
             }
@@ -113,8 +114,14 @@ public class Player {
         return null;
     }
 
-    public void attack(Enemy enemy){
-        equippedWeapon.attack(enemy);
+    public Enum<StatusCode> attack(Enemy enemy) {
+        if (enemy != null) {
+            equippedWeapon.attack(enemy);
+            return StatusCode.SUCCESS;
+        }
+        else {
+            return StatusCode.DOES_NOT_EXIST;
+    }
     }
 
     public ArrayList<Item> getItemsInInventory() {

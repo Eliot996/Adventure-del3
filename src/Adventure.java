@@ -13,7 +13,7 @@ public class Adventure {
         player = new Player();
         player.setCurrentRoom(mapOfGame.getMap()[0]);
         enemies.add(new Enemy("orc", 11,
-                new MeleeWeapon("sword", "a sword", "swordDesc", 10, 10),
+                new MeleeWeapon("sword", "a really heavy and shiny sword", "This sword will kill with skill", 10, 10),
                 mapOfGame.getMap()[0]));
     }
 
@@ -159,9 +159,14 @@ public class Adventure {
                 userInput = userInput.substring(7);
 
                 Enemy tempEnemy = getEnemyFromName(userInput);
-                if (tempEnemy != null) {
-                    player.attack(tempEnemy);
+                Enum<StatusCode> statusCode = player.attack(tempEnemy);
+                if (statusCode == StatusCode.SUCCESS) {
+                    System.out.println("you have attacked " + tempEnemy.getName());
                     System.out.println("enemy health: " + tempEnemy.getHealth());
+                }else if(statusCode == StatusCode.FAIL){
+                    System.out.println("You cannot attack that");
+                }else if(statusCode == StatusCode.DOES_NOT_EXIST){
+                    System.out.println("There is no enemy by that name in the room");
                 }
 
             } else if (userInput.startsWith("equip ")) {
