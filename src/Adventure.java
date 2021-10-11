@@ -98,6 +98,7 @@ public class Adventure {
                     }
                 }else if(userInput.startsWith("drink ")){
 
+                //
                 userInput = userInput.substring(6);
                 Item tempItem = player.getItemFromName(userInput);
                 Enum<StatusCode> success3 = player.eatItem(tempItem);
