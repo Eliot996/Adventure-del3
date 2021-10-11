@@ -32,6 +32,7 @@ public class Adventure {
 
         while (gameActive) {
 
+            // checks energy of the player, and prints the following responses, at given energy levels
             int currentEnergy = player.getEnergy();
             if (currentEnergy == 50) {
                 System.out.println("You seem to be tired. I recommend you take a break.");
@@ -42,6 +43,7 @@ public class Adventure {
                 gameActive = false;
             }
 
+            // gets input from user
             String userInput = input.nextLine().trim().toLowerCase();
 
             if (userInput.startsWith("go ")) {
@@ -84,16 +86,15 @@ public class Adventure {
                     }
 
                 }else if(userInput.startsWith("eat ")){
-
                     userInput = userInput.substring(4);
                     Item tempItem = player.getItemFromName(userInput);
-                    Enum<StatusCode> success2 = player.eatItem(tempItem);
+                    Enum<StatusCode> success = player.eatItem(tempItem);
 
-                    if(success2 == StatusCode.SUCCESS){
+                    if(success == StatusCode.SUCCESS){
                         System.out.println("you have eaten " + tempItem.getShortName());
-                    }else if(success2 == StatusCode.FAIL){
+                    }else if(success == StatusCode.FAIL){
                         System.out.println("You cannot eat that item");
-                    }else if(success2 == StatusCode.DOES_NOT_EXIST){
+                    }else if(success == StatusCode.DOES_NOT_EXIST){
                         System.out.println("That item does not exist");
                     }
                 }else if(userInput.startsWith("drink ")){
@@ -101,13 +102,13 @@ public class Adventure {
                 //
                 userInput = userInput.substring(6);
                 Item tempItem = player.getItemFromName(userInput);
-                Enum<StatusCode> success3 = player.eatItem(tempItem);
+                Enum<StatusCode> success = player.eatItem(tempItem);
 
-                if(success3 == StatusCode.SUCCESS){
+                if(success == StatusCode.SUCCESS){
                     System.out.println("you drank " + tempItem.getShortName());
-                }if(success3 == StatusCode.FAIL){
+                }if(success == StatusCode.FAIL){
                     System.out.println("You cannot drink that item");
-                }if(success3 == StatusCode.DOES_NOT_EXIST){
+                }if(success == StatusCode.DOES_NOT_EXIST){
                     System.out.println("That item does not exist");
                 }
 
@@ -219,16 +220,16 @@ public class Adventure {
     public String helpPlayer() { // TODO: 08/10/2021 update to include new commands: equip and unequip, eat, attack
         return Color.BRIGHT_GREEN + """
                  Here is some help for you. Hopefully this will make your journey easier:
-                 1) To move in and out of different rooms, combine 'go' with a direction,
-                    such as north, south, east or west, or simply use the starting letter of the direction.
-                 2) Type 'look' or 'l', to get a description of the room you are in.
-                 3) Type 'exit', to end the game.
-                 4) Type 'info', to get player information.
-                 5) Type 'take', to add an item to your inventory.
-                 6) Type 'drop', to drop an item from your inventory.
-                 7) Type 'inventory' or 'inv', to see the list of items that you've collected.
-                 8) Type 'inspect', to get a description of the item.
-                 9) Type 'break' or 'b', to take a break.
+                 1)  To move in and out of different rooms, combine 'go' with a direction,
+                     such as north, south, east or west, or simply use the starting letter of the direction.
+                 2)  Type 'look' or 'l', to get a description of the room you are in.
+                 3)  Type 'exit', to end the game.
+                 4)  Type 'info', to get player information.
+                 5)  Type 'take', to add an item to your inventory.
+                 6)  Type 'drop', to drop an item from your inventory.
+                 7)  Type 'inventory' or 'inv', to see the list of items that you've collected.
+                 8)  Type 'inspect', to get a description of the item.
+                 9)  Type 'break' or 'b', to take a break.
                  10) Type 'health', to see your health information.
                  11) Type 'attack', to attack to attack enemies.
                  I wish you the best of luck!
