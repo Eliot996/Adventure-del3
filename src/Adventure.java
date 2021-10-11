@@ -186,8 +186,6 @@ public class Adventure {
                 if (statusCode == StatusCode.SUCCESS) {
                     System.out.println("you have attacked " + tempEnemy.getName());
                     System.out.println("enemy health: " + tempEnemy.getHealth());
-                }else if(statusCode == StatusCode.FAIL){
-                    System.out.println("You cannot attack that");
                 }else if(statusCode == StatusCode.DOES_NOT_EXIST){
                     System.out.println("There is no enemy by that name in the room");
                 }
