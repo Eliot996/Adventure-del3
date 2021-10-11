@@ -86,11 +86,16 @@ public class Adventure {
                     }
 
                 }else if(userInput.startsWith("eat ")){
+
+                    //cut excess from userInput, in order to simplify commands
                     userInput = userInput.substring(4);
+
+                    //Eats item and get statusCode.
                     Item tempItem = player.getItemFromName(userInput);
                     Enum<StatusCode> success = player.eatItem(tempItem);
 
                     if(success == StatusCode.SUCCESS){
+                    //Gives correct response, depending on the statusCode.
                         System.out.println("you have eaten " + tempItem.getShortName());
                     }else if(success == StatusCode.FAIL){
                         System.out.println("You cannot eat that item");
@@ -99,11 +104,14 @@ public class Adventure {
                     }
                 }else if(userInput.startsWith("drink ")){
 
-                //
+                //cut excess from userInput, in order to simplify commands.
                 userInput = userInput.substring(6);
+
+                //drinks item and get statusCode.
                 Item tempItem = player.getItemFromName(userInput);
                 Enum<StatusCode> success = player.eatItem(tempItem);
 
+                //Gives correct response, depending on the statusCode.
                 if(success == StatusCode.SUCCESS){
                     System.out.println("you drank " + tempItem.getShortName());
                 }if(success == StatusCode.FAIL){
@@ -232,6 +240,8 @@ public class Adventure {
                  9)  Type 'break' or 'b', to take a break.
                  10) Type 'health', to see your health information.
                  11) Type 'attack', to attack to attack enemies.
+                 12) Type 'equip', to equip a weapon.
+                 13) Type 'unequip weapon', to un-equip a weapon.
                  I wish you the best of luck!
                  XOXO, Gossip girl \uD83D\uDE09
                 """;
