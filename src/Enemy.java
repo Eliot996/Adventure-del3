@@ -10,16 +10,25 @@ public class Enemy {
     private Item weapon;
     private Room currentRoom;
     private ArrayList<Item> inventory = new ArrayList<>();
+    private boolean isAgressive;
 
-    public Enemy(String name, int health, Item weapon, Room currentRoom) {
+    public boolean isAgressive() {
+        return isAgressive;
+    }
+
+    public Enemy(String name, int health, Item weapon, Room currentRoom, boolean isAgressive) {
         this.name = name;
         this.health = health;
         this.weapon = weapon;
         this.currentRoom = currentRoom;
+        this.isAgressive = isAgressive;
     }
 
     public void takeDamage(int damage){
         health -= damage;
+        if (!isAgressive){
+            isAgressive = true;
+        }
     }
 
     public String getName() {
