@@ -232,7 +232,7 @@ public class Adventure {
 
                         // TODO: 11/10/2021 if the enemy is agressive attack player
                         if (enemy.isAgressive()){
-                            //enemy.attack(player);
+                            Enum<StatusCode> statusCodeEnum = enemy.attack(player);
                             System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked player, but did not hit");
                         }
                     }

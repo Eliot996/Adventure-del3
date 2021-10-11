@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Player {
+public class Player extends Character{
 
     private int HP;
     private int maxHP = 50;
@@ -9,7 +9,6 @@ public class Player {
     private final int weightLimit = 25;
     private int energy = 100;
     private final ArrayList<Item> itemsInInventory = new ArrayList<>();
-    private Weapon equippedWeapon;
 
     public Player() {
         this.HP = maxHP;
@@ -113,8 +112,13 @@ public class Player {
         return null;
     }
 
-    public void attack(Enemy enemy){
-        equippedWeapon.attack(enemy);
+    public Enum<StatusCode> attack(Character target){
+        if ( equippedWeapon != null){
+            equippedWeapon.attack(target);
+            return StatusCode.SUCCESS;
+        } else {
+            return StatusCode.NO_WEAPON_IN_SLOT;
+        }
     }
 
     public ArrayList<Item> getItemsInInventory() {
@@ -210,5 +214,10 @@ public class Player {
         } else {
             return StatusCode.FAIL;
         }
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+        HP -= damage;
     }
 }

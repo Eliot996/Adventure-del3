@@ -7,7 +7,7 @@ public class MeleeWeapon extends Weapon{
         this.damage = damage;
     }
 
-    public void attack(Enemy enemy){
-        enemy.takeDamage(damage);
+    public void attack(Character target){
+        target.takeDamage(damage);
     }
 }
