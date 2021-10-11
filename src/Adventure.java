@@ -96,7 +96,21 @@ public class Adventure {
                     }if(success2 == StatusCode.DOES_NOT_EXIST){
                         System.out.println("That item does not exist");
                     }
+                }else if(userInput.startsWith("drink ")){
+
+                userInput = userInput.substring(6);
+                Item tempItem = player.getItemFromName(userInput);
+                Enum<StatusCode> success3 = player.eatItem(tempItem);
+
+                if(success3 == StatusCode.SUCCESS){
+                    System.out.println("you drank " + tempItem.getShortName());
+                }if(success3 == StatusCode.FAIL){
+                    System.out.println("You cannot drink that item");
+                }if(success3 == StatusCode.DOES_NOT_EXIST){
+                    System.out.println("That item does not exist");
                 }
+
+            }
                 else if (userInput.startsWith("drop ")) {
                 // cut excess from userInput, in order to simplify commands
                 userInput = userInput.substring(5);
@@ -124,6 +138,7 @@ public class Adventure {
                 System.out.println(inspect(userInput));
 
             } else if (userInput.startsWith("break") || userInput.startsWith("b")) {
+                System.out.println("you took a break");
                 player.takeABreak();
 
             } else if (userInput.startsWith("health")) {
