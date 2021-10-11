@@ -131,6 +131,9 @@ public class Player {
     public void energyUpdate(int energyUpdate) {
         int energy = getEnergy();
         energy += energyUpdate;
+        if(energy > 100){
+            energy = 100;
+        }
         setEnergy(energy);
     }
 
