@@ -4,6 +4,7 @@ public class Enemy {
 
     // TODO: 08/10/2021 add functionality to Class, like dies, drop items, attact,
     //  wrether or not the enemy will attact on sight, should the enemy move around?
+    //  deathrattle?
 
     private String name;
     private int health;

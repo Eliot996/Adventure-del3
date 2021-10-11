@@ -123,7 +123,7 @@ public class Adventure {
                 userInput = userInput.substring(8);
                 System.out.println(inspect(userInput));
 
-            } else if (userInput.startsWith("break") || userInput.startsWith("b")) {
+            } else if (userInput.startsWith("break") || userInput.startsWith("b")) { // TODO: 11/10/2021 add message
                 player.takeABreak();
 
             } else if (userInput.startsWith("health")) {
@@ -156,7 +156,6 @@ public class Adventure {
                 returnString.append("\nYou also see a ").append(enemy.getName()).append(" in the room");
             }
         }
-
         return returnString.toString();
     }
 
