@@ -160,8 +160,10 @@ public class Adventure {
                 }
 
             } else if (userInput.startsWith("unequip weapon")) {
+                // calls player.unEquipWeapon() and get StatusCode
                 Enum<StatusCode> statusCodeEnum = player.unEquipWeapon();
 
+                // depending on the statuscode the user will get the right respons
                 if (statusCodeEnum == StatusCode.SUCCESS){
                     System.out.println("You have unequipped your weapon");
                 }else if (statusCodeEnum == StatusCode.FAIL){
@@ -197,7 +199,7 @@ public class Adventure {
         return "There is no item by that name in your inventory";
     }
 
-    public String helpPlayer() { // TODO: 08/10/2021 update to include new commands
+    public String helpPlayer() { // TODO: 08/10/2021 update to include new commands: equip and unequip, eat, attack
         return Color.BRIGHT_GREEN + """
                  Here is some help for you. Hopefully this will make your journey easier:
                  1) To move in and out of different rooms, combine 'go' with a direction,
