@@ -4,22 +4,31 @@ import java.util.Scanner;
 public class Adventure {
 
     private final ArrayList<Enemy> enemies = new ArrayList();
+    private ArrayList<Enemy> enemiesInRoom;
     private final Map mapOfGame;
     private final Player player;
+    private boolean isInCombat = false;
     Scanner input = new Scanner(System.in);
 
     public Adventure() {
+        // makes map of the game
         mapOfGame = new Map();
+
+        // makes player object and set starting room
         player = new Player();
         player.setCurrentRoom(mapOfGame.getMap()[0]);
+
+        // makes an enemy, and gets the enemies in the first room
         enemies.add(new Enemy("orc", 11,
                 new MeleeWeapon("sword", "a sword", "swordDesc", 10, 10),
-                mapOfGame.getMap()[0]));
+                mapOfGame.getMap()[0], true));
+        enemiesInRoom = getEnemiesInCurrentRoom();
     }
 
     public void play() {
 
         boolean gameActive = true;
+
         //Intro to the game.
         System.out.println(Color.VIBRANT_PURPLE + "Welcome to the adventure game!" +
                 "\nThere are many different rooms to travel between, some rooms are better than others," +
@@ -47,9 +56,23 @@ public class Adventure {
             String userInput = input.nextLine().trim().toLowerCase();
 
             if (userInput.startsWith("go ")) {
+                // cut excess from userInput, in order to simplify commands
                 userInput = userInput.substring(3);
+
+                // save currentRoom
+                Room savedRoom = player.getCurrentRoom();
+
+                // energy cost
                 player.energyUpdate(-5);
+
+                // prints respos to moving
                 System.out.println(player.goTo(userInput));
+
+                // if the player has moved to a differnt room, clear enemies in room and
+                if (savedRoom != player.getCurrentRoom()) {
+                    enemiesInRoom.clear();
+                    enemiesInRoom = getEnemiesInCurrentRoom();
+                }
 
             } else if (userInput.startsWith("exit")) {
                 System.out.println(Color.BRIGHT_RED + "Leaving already? :(");
@@ -200,6 +223,21 @@ public class Adventure {
                 System.out.println("I don't understand that. Please try again :)");
             }
 
+            // TODO: 11/10/2021 handle enemies in combat
+            if (isInCombat){
+                // check enemies in room
+                if (enemiesInRoom.size() > 0){
+                    for (Enemy enemy : enemiesInRoom){
+                        // TODO: 11/10/2021 if enemy has no health left, call dies()
+
+                        // TODO: 11/10/2021 if the enemy is agressive attack player
+                        if (enemy.isAgressive()){
+                            //enemy.attack(player);
+                            System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked player, but did not hit");
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -208,13 +246,30 @@ public class Adventure {
         StringBuilder returnString = new StringBuilder(player.getCurrentRoom().getDescription() + "\n" +
                 player.getCurrentRoom().getItems());
 
-        for (Enemy enemy : enemies) {
-            if (enemy.getCurrentRoom() == player.getCurrentRoom()) {
+        for (Enemy enemy : enemiesInRoom) {
                 returnString.append("\nYou also see a ").append(enemy.getName()).append(" in the room");
-            }
         }
 
         return returnString.toString();
+    }
+
+    public ArrayList<Enemy> getEnemiesInCurrentRoom(){
+        ArrayList<Enemy> currentEnemies = new ArrayList();
+
+        // run through all enemies
+        for (Enemy enemy : enemies) {
+
+            // if the enemy is in the same room as the player, add to the list
+            if (enemy.getCurrentRoom() == player.getCurrentRoom()) {
+                currentEnemies.add(enemy);
+            }
+
+            // if the enemy is aggresive, set combat to true
+            if (enemy.isAgressive()){
+                isInCombat = true;
+            }
+        }
+        return currentEnemies;
     }
 
     public String inspect(String itemName) {
