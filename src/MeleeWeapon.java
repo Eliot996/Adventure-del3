@@ -7,7 +7,8 @@ public class MeleeWeapon extends Weapon{
         this.damage = damage;
     }
 
-    public void attack(Character target){
+    public Enum<StatusCode> attack(Character target){
         target.takeDamage(damage);
+        return StatusCode.SUCCESS;
     }
 }

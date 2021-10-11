@@ -5,5 +5,5 @@ public abstract class  Weapon extends Item{
         super(shortName, longName, description, weight);
     }
 
-    public abstract void attack(Character taget);
+    public abstract Enum<StatusCode> attack(Character taget);
 }

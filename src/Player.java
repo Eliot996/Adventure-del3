@@ -113,12 +113,14 @@ public class Player extends Character{
         return null;
     }
 
-    public Enum<StatusCode> attack(Character enemy) {
-        if (enemy != null) {
-            equippedWeapon.attack(enemy);
-            return StatusCode.SUCCESS;
-        }
-        else {
+    public Enum<StatusCode> attack(Character target) {
+        if (target != null) {
+            if (equippedWeapon != null){
+                return equippedWeapon.attack(target);
+            } else {
+                return StatusCode.NO_WEAPON_IN_SLOT;
+            }
+        } else {
             return StatusCode.DOES_NOT_EXIST;
     }
     }
