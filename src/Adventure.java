@@ -178,7 +178,7 @@ public class Adventure {
             } else if (userInput.startsWith("health")) {
                 System.out.println(player.health());
 
-            } else if (userInput.startsWith("attack ")) { // TODO: 08/10/2021 add functionality to command
+            } else if (userInput.startsWith("attack ")) { //
                 userInput = userInput.substring(7);
 
                 Enemy tempEnemy = getEnemyFromName(userInput);
@@ -233,7 +233,7 @@ public class Adventure {
                     for (Enemy enemy : enemiesInRoom){
                         // TODO: 11/10/2021 if enemy has no health left, call dies()
 
-                        // TODO: 11/10/2021 if the enemy is agressive attack player
+                        // TODO: 11/10/2021 if the enemy is aggressive attack player
                         if (enemy.isAgressive()){
                             Enum<StatusCode> statusCodeEnum = enemy.attack(player);
                             System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked player, but did not hit");
@@ -285,7 +285,7 @@ public class Adventure {
         return "There is no item by that name in your inventory";
     }
 
-    public String helpPlayer() { // TODO: 08/10/2021 update to include new commands: equip and unequip, eat, attack
+    public String helpPlayer() { //
         return Color.BRIGHT_GREEN + """
                  Here is some help for you. Hopefully this will make your journey easier:
                  1)  To move in and out of different rooms, combine 'go' with a direction,
