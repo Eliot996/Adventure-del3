@@ -83,10 +83,13 @@ public class Player {
     }
 
     public Enum<StatusCode> eatItem(Item item){
+        //Checks if item is in the current room.
         if(item != null) {
 
+            //checks if item has an item of type Food
             if (item instanceof Food) {
                 HP += ((Food) item).getHealth();
+                //Makes sure that player HP does not exceed maxHP.
                 if(HP > maxHP){
                     HP = 50;
                 }
@@ -131,6 +134,7 @@ public class Player {
     public void energyUpdate(int energyUpdate) {
         int energy = getEnergy();
         energy += energyUpdate;
+        //makes sure that energy does not exceed 100.
         if(energy > 100){
             energy = 100;
         }

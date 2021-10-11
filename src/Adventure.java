@@ -241,9 +241,11 @@ public class Adventure {
                  8)  Type 'inspect', to get a description of the item.
                  9)  Type 'break' or 'b', to take a break.
                  10) Type 'health', to see your health information.
-                 11) Type 'attack', to attack to attack enemies.
-                 12) Type 'equip', to equip a weapon.
-                 13) Type 'unequip weapon', to un-equip a weapon.
+                 11) Type 'eat', to eat something.
+                 12) Type 'drink', to drink something.
+                 13) Type 'attack', to attack to attack enemies.
+                 14) Type 'equip', to equip a weapon.
+                 15) Type 'unequip weapon', to un-equip a weapon.
                  I wish you the best of luck!
                  XOXO, Gossip girl \uD83D\uDE09
                 """;
