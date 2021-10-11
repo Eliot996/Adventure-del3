@@ -113,7 +113,7 @@ public class Player extends Character{
         return null;
     }
 
-    public Enum<StatusCode> attack(Enemy enemy) {
+    public Enum<StatusCode> attack(Character enemy) {
         if (enemy != null) {
             equippedWeapon.attack(enemy);
             return StatusCode.SUCCESS;
