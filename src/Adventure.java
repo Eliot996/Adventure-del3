@@ -259,17 +259,21 @@ public class Adventure {
                 // check enemies in room
                 if (enemiesInRoom.size() > 0) {
                     for (Enemy enemy : enemiesInRoom) {
-                        // TODO: 11/10/2021 if enemy has no health left, call dies()
-
 
                         // TODO: 11/10/2021 if the enemy is aggressive attack player
                         if (enemy.isAgressive()) {
                             Enum<StatusCode> statusCodeEnum = enemy.attack(player);
                             if (statusCodeEnum == StatusCode.SUCCESS) {
-                                System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, you now have"
+                                System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, you now have "
                                         + player.getHP() + " HP" + Color.RESET_COLOR);
-                            } else if (statusCodeEnum == StatusCode.FAIL)
+                            } else if (statusCodeEnum == StatusCode.FAIL) {
                                 System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, but did not hit" + Color.RESET_COLOR);
+                            } else if (statusCodeEnum == StatusCode.DIED) {
+                                gameActive = false;
+                                System.out.println(Color.BRIGHT_RED + "GAME OVER!");
+                                System.out.println(Color.VIBRANT_YELLOW + enemy.getName() + " killed you" + Color.RESET_COLOR);
+                                break;
+                            }
                         }
                     }
                 }

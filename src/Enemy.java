@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Enemy extends Character{
 
-    // TODO: 08/10/2021 add functionality to Class, like dies, drop items, should the enemy move around?
+    // TODO: 08/10/2021 add functionality to Class, should the enemy move around?
 
     private String name;
     private int health;
