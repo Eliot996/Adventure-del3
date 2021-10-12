@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class Enemy extends Character{
 
     // TODO: 08/10/2021 add functionality to Class, like dies, drop items, should the enemy move around?
-    //                                                   follow the player if agressive
 
     private String name;
     private int health;
@@ -49,9 +48,6 @@ public class Enemy extends Character{
             if (targetRoom != null){
                 currentRoom = targetRoom;
             }
-            System.out.println("Followed the user");
-        }else{
-            System.out.println("didn't follow the user");
         }
     }
 
