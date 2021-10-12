@@ -71,7 +71,7 @@ public class Adventure {
                 // if the player has moved to a differnt room, make aggressive enemies try to follow the player into the next room
                 if (savedRoom != player.getCurrentRoom()) {
                     for (Enemy enemy : enemiesInRoom) {
-                        if (enemy.isAgressive()){
+                        if (enemy.isAgressive()) {
                             enemy.follow(userInput);
                         }
                     }
@@ -80,17 +80,17 @@ public class Adventure {
                 }
 
                 // prints respons to moving
-                if ( statusCodeEnum == StatusCode.SUCCESS){
+                if (statusCodeEnum == StatusCode.SUCCESS) {
                     System.out.println(player.getCurrentRoom().visitRoom());
-                    if ( enemiesInRoom.size() > 0){
+                    if (enemiesInRoom.size() > 0) {
                         System.out.println(getStringOfEnemiesInCurrentRoom());
                     }
-                } else if (statusCodeEnum == StatusCode.FAIL){
+                } else if (statusCodeEnum == StatusCode.FAIL) {
                     System.out.println("You cannot go that way in this room");
                 }
 
             } else if (userInput.startsWith("exit")) {
-                System.out.println(Color.BRIGHT_RED + "Leaving already? :(");
+                System.out.println(Color.BRIGHT_RED + "Leaving already? :(" + Color.RESET_COLOR);
                 System.out.println("Hopefully we'll see each other again :) ");
                 gameActive = false;
 
@@ -152,11 +152,11 @@ public class Adventure {
                 //Gives correct response, depending on the statusCode.
                 if (success == StatusCode.SUCCESS) {
                     System.out.println("you drank " + tempItem.getShortName());
-                }
-                if (success == StatusCode.FAIL) {
+
+                }else if (success == StatusCode.FAIL) {
                     System.out.println("You cannot drink that item");
-                }
-                if (success == StatusCode.DOES_NOT_EXIST) {
+
+                } else if (success == StatusCode.DOES_NOT_EXIST) {
                     System.out.println("That item does not exist");
                 }
 
@@ -193,7 +193,7 @@ public class Adventure {
             } else if (userInput.startsWith("health")) {
                 System.out.println(player.health());
 
-            } else if (userInput.startsWith("attack ")) { //
+            } else if (userInput.startsWith("attack ")) {
                 userInput = userInput.substring(7);
 
                 Enemy tempEnemy = getEnemyFromName(userInput);
@@ -202,9 +202,19 @@ public class Adventure {
                 if (statusCode == StatusCode.SUCCESS) {
                     System.out.println("you have attacked " + tempEnemy.getName()
                             + ", and has " + tempEnemy.getHealth() + " health left");
-                }else if (statusCode == StatusCode.NO_WEAPON_IN_SLOT){
-                    System.out.println("Attacking the " + tempEnemy.getName() + " with your bare hands, are not a good idea");
-                } else if(statusCode == StatusCode.DOES_NOT_EXIST){
+
+                } else if (statusCode == StatusCode.DIED) {
+                    tempEnemy.die();
+                    enemies.remove(tempEnemy);
+                    enemiesInRoom.remove(tempEnemy);
+
+                    System.out.println("You killed " + tempEnemy.getName()
+                            + ", and it dropped its weapon and inventory on the ground");
+
+                } else if (statusCode == StatusCode.NO_WEAPON_IN_SLOT) {
+                    System.out.println("Attacking the " + tempEnemy.getName() + " with your bare hands, is not a good idea");
+
+                } else if (statusCode == StatusCode.DOES_NOT_EXIST) {
                     System.out.println("There is no enemy by that name in the room");
                 }
 
@@ -245,21 +255,21 @@ public class Adventure {
             }
 
             // TODO: 11/10/2021 handle enemies in combat
-            if (isInCombat){
+            if (isInCombat) {
                 // check enemies in room
-                if (enemiesInRoom.size() > 0){
-                    for (Enemy enemy : enemiesInRoom){
+                if (enemiesInRoom.size() > 0) {
+                    for (Enemy enemy : enemiesInRoom) {
                         // TODO: 11/10/2021 if enemy has no health left, call dies()
 
 
                         // TODO: 11/10/2021 if the enemy is aggressive attack player
-                        if (enemy.isAgressive()){
+                        if (enemy.isAgressive()) {
                             Enum<StatusCode> statusCodeEnum = enemy.attack(player);
-                            if (statusCodeEnum == StatusCode.SUCCESS){
-                                System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, you now have "
-                                        + player.getHP() + " HP");
-                            } else if(statusCodeEnum == StatusCode.FAIL)
-                            System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, but did not hit");
+                            if (statusCodeEnum == StatusCode.SUCCESS) {
+                                System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, you now have"
+                                        + player.getHP() + " HP" + Color.RESET_COLOR);
+                            } else if (statusCodeEnum == StatusCode.FAIL)
+                                System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, but did not hit" + Color.RESET_COLOR);
                         }
                     }
                 }
@@ -269,9 +279,16 @@ public class Adventure {
 
 
     public String look() {
-        return player.getCurrentRoom().getDescription() + "\n" +
-                player.getCurrentRoom().getItems() + "\n" +
-                getStringOfEnemiesInCurrentRoom();
+        String stringOfEnemiesInCurrentRoom = getStringOfEnemiesInCurrentRoom();
+
+        if (stringOfEnemiesInCurrentRoom != null){
+            return player.getCurrentRoom().getDescription() + "\n" +
+                    player.getCurrentRoom().getItems() + "\n" +
+                    stringOfEnemiesInCurrentRoom;
+        } else {
+            return player.getCurrentRoom().getDescription() + "\n" +
+                    player.getCurrentRoom().getItems();
+        }
     }
 
     public ArrayList<Enemy> getEnemiesInCurrentRoom(){
@@ -294,17 +311,21 @@ public class Adventure {
     }
 
     public String getStringOfEnemiesInCurrentRoom(){
-        StringBuilder returnString = new StringBuilder("\nYou also see: \n");
+        if (enemiesInRoom.size() > 0 ) {
+            StringBuilder returnString = new StringBuilder("\nYou also see: \n");
 
-        for (Enemy enemy : enemiesInRoom) {
-            returnString.append(enemy.getName()).append(" in the room" + '\n');
+            for (Enemy enemy : enemiesInRoom) {
+                returnString.append(enemy.getName()).append(" in the room" + '\n');
+            }
+
+            return returnString.toString();
+        } else {
+            return null;
         }
-
-        return returnString.toString();
     }
 
     public String inspect(String itemName) {
-        for (Item item : player.getItemsInInventory()) { // loops through the arrayList itemsInInventory, and set item to the current item
+        for (Item item : player.getInventory()) { // loops through the arrayList itemsInInventory, and set item to the current item
             if (item.getShortName().equalsIgnoreCase(itemName)) { //check if it is in item with the shortName of itemName
                 return item.getDescription(); //returns the description of the item.
             }

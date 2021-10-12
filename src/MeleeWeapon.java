@@ -8,8 +8,7 @@ public class MeleeWeapon extends Weapon{
     }
 
     public Enum<StatusCode> attack(Character target){
-        target.takeDamage(damage);
-        return StatusCode.SUCCESS;
+        return target.takeDamage(damage);
     }
 
     @Override

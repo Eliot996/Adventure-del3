@@ -1,4 +1,3 @@
-import java.lang.annotation.Target;
 import java.util.ArrayList;
 
 public class Player extends Character {
@@ -9,7 +8,7 @@ public class Player extends Character {
     private int weight;
     private final int weightLimit = 25;
     private int energy = 100;
-    private final ArrayList<Item> itemsInInventory = new ArrayList<>();
+    private final ArrayList<Item> inventory = new ArrayList<>();
 
     public Player() {
         this.HP = maxHP;
@@ -38,10 +37,10 @@ public class Player extends Character {
     }
 
     public String getFormattedInventory() {
-        if (itemsInInventory.size() > 0) {
+        if (inventory.size() > 0) {
             StringBuilder items = new StringBuilder("You have these items in your inventory:\n");
 
-            for (Item item : itemsInInventory) {
+            for (Item item : inventory) {
                 items.append(item.getLongName()).append("\n");
             }
             return items.toString();
@@ -52,7 +51,7 @@ public class Player extends Character {
     // drops item from user inventory and adds it to the current room, as well as subtracts the weight of the item from players weight
     public Enum<StatusCode> dropItem(Item item) {
         if (item != null) {
-            itemsInInventory.remove(item);
+            inventory.remove(item);
             currentRoom.addItem(item);
             return StatusCode.SUCCESS;
         }
@@ -64,7 +63,7 @@ public class Player extends Character {
         if (item != null) {
             if (weight + item.getWeight() <= weightLimit) {
                 currentRoom.removeItem(item);
-                itemsInInventory.add(item);
+                inventory.add(item);
                 weight += item.getWeight();
                 return StatusCode.SUCCESS;
             } else {
@@ -86,7 +85,7 @@ public class Player extends Character {
                 if (HP > maxHP) {
                     HP = 50;
                 }
-                itemsInInventory.remove(item);
+                inventory.remove(item);
                 return StatusCode.SUCCESS;
 
             } else {
@@ -99,7 +98,7 @@ public class Player extends Character {
     }
 
     public Item getItemFromName(String itemName) {
-        for (Item item : itemsInInventory) {
+        for (Item item : inventory) {
             if (item.getShortName().equalsIgnoreCase(itemName)) {
                 return item;
             }
@@ -119,8 +118,8 @@ public class Player extends Character {
         }
     }
 
-    public ArrayList<Item> getItemsInInventory() {
-        return itemsInInventory;
+    public ArrayList<Item> getInventory() {
+        return inventory;
     }
 
     public String health() {
@@ -187,7 +186,7 @@ public class Player extends Character {
                     // if the slot is empty, add tmpItem to equippedWeapon and remove it from the inventory,
                     // and return SUCCESS
                     equippedWeapon = (Weapon) tmpItem;
-                    itemsInInventory.remove(tmpItem);
+                    inventory.remove(tmpItem);
 
                     return StatusCode.SUCCESS;
                 } else {
@@ -206,7 +205,7 @@ public class Player extends Character {
 
     public Enum<StatusCode> unEquipWeapon() {
         if (equippedWeapon != null) {
-            itemsInInventory.add(equippedWeapon);
+            inventory.add(equippedWeapon);
             equippedWeapon = null;
             return StatusCode.SUCCESS;
         } else {
@@ -215,7 +214,13 @@ public class Player extends Character {
     }
 
     @Override
-    public void takeDamage(int damage) {
+    public Enum<StatusCode> takeDamage(int damage) {
         HP -= damage;
+
+        if (HP <= 0){
+            return StatusCode.DIED;
+        } else {
+            return StatusCode.SUCCESS;
+        }
     }
 }

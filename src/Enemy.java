@@ -22,10 +22,15 @@ public class Enemy extends Character{
         this.isAgressive = isAgressive;
     }
 
-    public void takeDamage(int damage){ // TODO: 11/10/2021 checks if dead
+    public Enum<StatusCode> takeDamage(int damage){
         health -= damage;
         if (!isAgressive){
             isAgressive = true;
+        }
+        if (health <= 0){
+            return StatusCode.DIED;
+        } else {
+            return StatusCode.SUCCESS;
         }
     }
 
@@ -48,6 +53,13 @@ public class Enemy extends Character{
             if (targetRoom != null){
                 currentRoom = targetRoom;
             }
+        }
+    }
+
+    public void die(){
+        currentRoom.addItem(equippedWeapon);
+        for (Item item: inventory) {
+            currentRoom.addItem(item);
         }
     }
 
