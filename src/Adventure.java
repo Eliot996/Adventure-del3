@@ -254,20 +254,23 @@ public class Adventure {
                 System.out.println("I don't understand that. Please try again :)");
             }
 
-            // TODO: 11/10/2021 handle enemies in combat
+            // This block handles the enemy side of combat, and interaction
             if (isInCombat) {
-                // check enemies in room
+                // check if there are enemies in room
                 if (enemiesInRoom.size() > 0) {
                     for (Enemy enemy : enemiesInRoom) {
-
-                        // TODO: 11/10/2021 if the enemy is aggressive attack player
+                        // then it checks if the enemy is aggresive
                         if (enemy.isAgressive()) {
-                            Enum<StatusCode> statusCodeEnum = enemy.attack(player);
+                            Enum<StatusCode> statusCodeEnum = enemy.attack(player); // gets the respons from the attack
+
+                            // prints the proper respons to the user, and if the player died the game stops
                             if (statusCodeEnum == StatusCode.SUCCESS) {
                                 System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, you now have "
                                         + player.getHP() + " HP" + Color.RESET_COLOR);
+
                             } else if (statusCodeEnum == StatusCode.FAIL) {
                                 System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, but did not hit" + Color.RESET_COLOR);
+
                             } else if (statusCodeEnum == StatusCode.DIED) {
                                 gameActive = false;
                                 System.out.println(Color.BRIGHT_RED + "GAME OVER!");
