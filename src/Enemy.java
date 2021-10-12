@@ -30,6 +30,31 @@ public class Enemy extends Character{
         }
     }
 
+    public Enum<StatusCode> attack(Character player) {
+        if (equippedWeapon != null){
+            return equippedWeapon.attack(player);
+        } else {
+            return StatusCode.NO_WEAPON_IN_SLOT;
+        }
+    }
+
+    public void follow(String userInput){
+        // get the chance for the enemy to follow
+        double chance = Math.random();
+
+        if (chance < 0.5){
+            // gets the target room from the userInput, and save it in targetRoom
+            Room targetRoom = currentRoom.getRoomFromDirectionName(userInput);
+
+            if (targetRoom != null){
+                currentRoom = targetRoom;
+            }
+            System.out.println("Followed the user");
+        }else{
+            System.out.println("didn't follow the user");
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -44,13 +69,5 @@ public class Enemy extends Character{
 
     public Room getCurrentRoom() {
         return currentRoom;
-    }
-
-    public Enum<StatusCode> attack(Character player) {
-        if (equippedWeapon != null){
-            return equippedWeapon.attack(player);
-        } else {
-            return StatusCode.NO_WEAPON_IN_SLOT;
-        }
     }
 }
