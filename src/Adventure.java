@@ -31,8 +31,9 @@ public class Adventure {
 
         //Intro to the game.
         System.out.println(Color.VIBRANT_PURPLE + "Welcome to the adventure game!" +
+                "\n The game takes place in the middle age." +
                 "\nThere are many different rooms to travel between, some rooms are better than others," +
-                " but your main goal should be to find the 'the vault'. " +
+                " but your main goal should be to find the 'The vault', where the treasure is hidden." +
                 "\nIf you at any point need assistance, just type 'help' or ´h', where a useful guide will magically appear" +
                 "\n I wish you the best of luck! See you on the other side \uD83D\uDE09");
         System.out.println();

@@ -28,11 +28,6 @@ public class Enemy extends Character{
         return super.takeDamage(damage);
     }
 
-    @Override
-    public Enum<StatusCode> useAmmo(int ammo) {
-        return null;
-    }
-
     public void follow(String userInput){
         // get the chance for the enemy to follow
         double chance = Math.random();

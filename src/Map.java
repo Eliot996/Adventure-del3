@@ -7,16 +7,19 @@ public class Map {
         map = new Room[26];
 
         //Creating the room objects
-        map[0] = new Room("Sleeping chambers", "Cold and dark.");
+        map[0] = new Room("Sleeping chambers", "Cold and dark room.");
 
-        map[1] = new Room("Corridor", "This is a long and dimly lit passage, which  may lead to several " +
-                "different rooms.");
+        map[1] = new Room("Corridor", "This is a long and dimly lit passage. " +
+                "There are 4 doors and each door will lead you to a different room. " +
+                "You can go north, south, east or west.");
 
-        map[2] = new Room("Corridor", "This is a long and dimly lit passage, which may lead to several " +
-                "different rooms.");
+        map[2] = new Room("Corridor", "This is a long and dimly lit passage, " +
+                "There are 4 doors and each door will lead you to a different room. " +
+                "You can go north, south, east or west.");
 
-        map[3] = new Room("Corridor", "This is a long and dimly lit passage, which may lead to several " +
-                "different rooms.");
+        map[3] = new Room("Corridor", "This is a long and dimly lit passage." +
+                "There are 4 doors and each door will lead you to a different room. " +
+                "You can go north, south, east or west.");
 
         map[4] = new Room("The catacombs", "Dimly lit, nerve wracking and unwelcoming. Human bones and skulls are " +
                 "dispersed all around.");
@@ -35,13 +38,15 @@ public class Map {
 
         map[10] = new Room("Oratory", "A small room reserved for private worship with an altar and pews.");
 
-        map[11] = new Room("Corridor", "This is a long and dimly lit passage, which  may lead to several " +
-                "different rooms.");
+        map[11] = new Room("Corridor", "This is a long and dimly lit passage. " +
+                "There are 3 doors and each door will lead you to a different room. " +
+                "You can go south, east or west.");
 
         map[12] = new Room("The observatory", "This room is for observing something XD");
 
-        map[13] = new Room("Corridor", "This is a long and dimly lit passage, which  may lead to several " +
-                "different rooms.");
+        map[13] = new Room("Corridor", "This is a long and dimly lit passage. " +
+                "There are 4 doors and each door will lead you to a different room." +
+                "You can go north, south, east or west.");
 
         map[14] = new Room("The library", "Tall bookshelves, filled with well organized books. This place seems nice to be in.");
 
@@ -50,8 +55,9 @@ public class Map {
 
         map[16] = new Room("The guard room", "Be careful in here...don't hurt yourself \uD83D\uDE09");
 
-        map[17] = new Room("Corridor", "This is a long and dimly lit passage, which  may lead to several " +
-                "different rooms.");
+        map[17] = new Room("Corridor", "This is a long and dimly lit passage. " +
+                "There are 3 doors and each door will lead you to a different room. " +
+                "You can go north, south or east");
 
         map[18] = new Room("The vault", "Extraordinary room filled with luxurious items. " +
                 "The treasure must be in here somewhere :D");
@@ -127,20 +133,73 @@ public class Map {
 
 
         //Added different items to different rooms
-        map[0].addItem(new Item("flashlight", "old ass flashlight", "This will light up your world like nothing else", 7));
-        map[5].addItem(new Food("rat", "a dead rat", "This stinks", 1, -3));
+        map[0].addItem(new Item("club", "an oak club", "This club is your only defence XD", 7));
         map[7].addItem(new Item("pillow", "a soft and fluffy pillow", "This pillow is so fluffy i'm gonna die", 5));
         map[9].addItem(new Food("soup", "good soup \uD83D\uDC4C", "A bowl of good soup", 3, -5));
-        map[22].addItem(new Item("peberspray", "a small can of peberspray", "This is gonna burn.", 3));
-        map[6].addItem(new Item("club", "an oak club", "This club is your only defence XD", 7));
         map[18].addItem(new Item("treasure", "a jar of gold", "you've gotten the jar of gold!", 15));
         map[19].addItem(new Food("potion", "potion to heal", "This magical potion will heal your injuries.", 10, 25));
         map[22].addItem(new Food("beer", "a cold pint of beer", "This will quench your thirst.", 3, 2));
         map[22].addItem(new Food("Red wine", "a delicious glass of goodness", "This will fill you with joy", 7, 2));
         map[22].addItem(new Food("tart", "a warm and delicious tart", "This will give you some well-deserved energy.", 3, 2));
         map[23].addItem(new Food("Ham", "a big piece of ham", "This piece of ham will save your life", 3, 5));
+        map[0].addItem(new Item("map", "a map of the adventure game", mapDisc(), 10));
 
 
+
+    }
+
+    public String mapDisc(){
+        return """
+                 ___________________     __________________
+                |                  |    |                 |
+                |    The Vault     |    |     Library     |
+                |__________________|    |_________________|
+                         ||                      ||
+                 ___________________     __________________     __________________                            __________________
+                |                  |    |                 |    |                 |                           |                  |
+                |      Corridor    | == |     Corridor    | == |    Corridor     | ========================= |    Observatory   |
+                |__________________|    |_________________|    |_________________|                           |__________________|
+                          ||                     ||                     ||                                            ||
+                 ___________________     __________________     __________________                                    ||
+                 |                  |    |                 |   |                  |                                   ||
+                 |   Royal mages    |    |    Court yard   |   |     Oratory      |                                   ||
+                 |     quarters     |    |_________________|   |__________________|                                   ||
+                 |__________________|            ||                                                                   ||
+                          ||                     ||                                                                   ||
+                           ||            __________________                           __________________              ||              ___________________
+                            ||          |                  |                         |                  |             ||             |                   |
+                             ||         |    Guard room    |                         |    Throne room   |             ||             |      Boudoirs     |
+                              ||        |__________________|                         |__________________|             ||             |___________________|
+                               ||                 ||                                          ||                      ||                      ||
+                                ||                  ||                                __________________      __________________      ___________________
+                                 ||                   ||                             |                  |    |                  |    |                   |
+                                  ||                    ============================ |     Corridor     | == |     Oak room     | == |   Royal chambers  |
+                                   ||                                                |__________________|    |__________________|    |___________________|
+                                    ||                                                        ||
+                                     ||                                                       ||
+        ___________________      ___________________                                 ___________________     ___________________
+       |                   |    |                   |                               |                  |    |                   |
+       |      Entrance     | == |   The great hall  |  ============================ |     Corridor     | == | Sleeping chambers |
+       |___________________|    |___________________|                               |__________________|    |___________________|
+                                         ||                                                 ||
+                                         ||                                                 ||
+                                         ||                                                 ||
+                                         ||                                                 ||
+                                         ||                                                 ||
+                                         ||                                                 ||
+                                         ||                                                 ||
+                                         ||                                                 ||
+                                         ||                                                 ||
+                                         ||                ___________________      ___________________                               ___________________
+                                         ||               |                   |    |                   |                             |                   |
+                                         ||               |    Storage room   | == |      Corridor     | =========================== |   The catacombs   |  
+                                         ||               |___________________|    |___________________|                             |___________________|
+                                         ||                        ||                       ||
+         ___________________      ___________________      ___________________      ___________________
+         |                  |    |                   |    |                   |    |                   |
+         |      Pantry      | == |      Kitchen      | == |  Servant chambers | == |      Lavatory     |
+         |__________________|    |___________________|    |___________________|    |___________________|                    
+                """;
     }
 
     public Room[] getMap() {
