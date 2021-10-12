@@ -159,10 +159,49 @@ public class Player extends Character {
         }
     }
 
+    public Enum<StatusCode> equipShield(Item tmpItem) {
+        // checks if there tmpItem contains an item
+        if (tmpItem != null) {
+
+            // checks if tmpItem has an item of type Weapon
+            if (tmpItem instanceof Shield) {
+
+                // checks if equippedWeapon is empty
+                if (equippedShield == null) {
+                    // if the slot is empty, add tmpItem to equippedWeapon and remove it from the inventory,
+                    // and return SUCCESS
+                    equippedShield = (Shield) tmpItem;
+                    inventory.remove(tmpItem);
+
+                    return StatusCode.SUCCESS;
+                } else {
+                    // if the slot is not empty, return SLOT_NOT_EMPTY
+                    return StatusCode.SLOT_NOT_EMPTY;
+                }
+            } else {
+                // if tmpItem is of wrong type return FAIL
+                return StatusCode.FAIL;
+            }
+        } else {
+            // if tmpItem is empty, return DOES_NOT_EXIST
+            return StatusCode.DOES_NOT_EXIST;
+        }
+    }
+
     public Enum<StatusCode> unEquipWeapon() {
         if (equippedWeapon != null) {
             inventory.add(equippedWeapon);
             equippedWeapon = null;
+            return StatusCode.SUCCESS;
+        } else {
+            return StatusCode.FAIL;
+        }
+    }
+
+    public Enum<StatusCode> unEquipShield() {
+        if (equippedShield != null) {
+            inventory.add(equippedShield);
+            equippedShield = null;
             return StatusCode.SUCCESS;
         } else {
             return StatusCode.FAIL;

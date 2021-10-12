@@ -19,9 +19,9 @@ public class Adventure {
         player.setCurrentRoom(mapOfGame.getMap()[0]);
 
         // makes an enemy, and gets the enemies in the first room
-        enemies.add(new Enemy("orc", 11,
-                new MeleeWeapon("sword", "a really heavy and shiny sword", "This sword will kill with skill", 10, 10),
-                mapOfGame.getMap()[0], true));
+        //enemies.add(new Enemy("orc", 11,
+        //       new MeleeWeapon("sword", "a really heavy and shiny sword", "This sword will kill with skill", 10, 10),
+        //       mapOfGame.getMap()[0], true));
         enemiesInRoom = getEnemiesInCurrentRoom();
     }
 
@@ -179,7 +179,7 @@ public class Adventure {
                     System.out.println("I cannot find an item by that name in your inventory");
                 }
 
-            } else if (userInput.startsWith("inventory") || userInput.startsWith("inv") || userInput.startsWith("i")) {
+            } else if (userInput.startsWith("inventory") || userInput.startsWith("inv")) {
                 System.out.println(player.getFormattedInventory());
 
             } else if (userInput.startsWith("inspect ")) {
@@ -221,36 +221,59 @@ public class Adventure {
                 }
 
             } else if (userInput.startsWith("equip ")) {
+                Enum<StatusCode> statusCode;
+
                 // cut excess from userInput, in order to simplify commands
                 userInput = userInput.substring(6);
 
                 // get the item from the room the player is currently in
                 Item tmpItem = player.getItemFromName(userInput);
 
-                // take item and get StatusCode
-                Enum<StatusCode> statusCode = player.equipWeapon(tmpItem);
+                if (tmpItem instanceof Weapon) {
+                    // take item and get StatusCode
+                    statusCode = player.equipWeapon(tmpItem);
+                }else {
+                    statusCode = player.equipShield(tmpItem);
+                }
 
                 // depending on the statuscode the user will get the right respons
                 if (statusCode == StatusCode.SUCCESS) {
                     System.out.println("You have equipped " + tmpItem.getShortName());
                 } else if (statusCode == StatusCode.FAIL) {
-                    System.out.println("That item is not a weapon");
+                    System.out.println("That item is not something you can equip");
                 } else if (statusCode == StatusCode.SLOT_NOT_EMPTY) {
                     System.out.println("You already have an item equipped");
                 } else if (statusCode == StatusCode.DOES_NOT_EXIST) {
                     System.out.println("You cannot find an item by that name");
                 }
 
-            } else if (userInput.startsWith("unequip weapon")) {
-                // calls player.unEquipWeapon() and get StatusCode
-                Enum<StatusCode> statusCodeEnum = player.unEquipWeapon();
+            } else if (userInput.startsWith("unequip ")) {
+                userInput = userInput.substring(8);
 
-                // depending on the statuscode the user will get the right respons
-                if (statusCodeEnum == StatusCode.SUCCESS) {
-                    System.out.println("You have unequipped your weapon");
-                } else if (statusCodeEnum == StatusCode.FAIL) {
-                    System.out.println("You dont have a weapon equipped");
+                if (userInput.equals("weapon")){
+                    // calls player.unEquipWeapon() and get StatusCode
+                    Enum<StatusCode> statusCodeEnum = player.unEquipWeapon();
+
+                    // depending on the statuscode the user will get the right respons
+                    if (statusCodeEnum == StatusCode.SUCCESS) {
+                        System.out.println("You have unequipped your weapon");
+                    } else if (statusCodeEnum == StatusCode.FAIL) {
+                        System.out.println("You dont have a weapon equipped");
+                    }
+                } else if (userInput.equals("shield")){
+                    // calls player.unEquipWeapon() and get StatusCode
+                    Enum<StatusCode> statusCodeEnum = player.unEquipShield();
+
+                    // depending on the statuscode the user will get the right respons
+                    if (statusCodeEnum == StatusCode.SUCCESS) {
+                        System.out.println("You have unequipped your shield");
+                    } else if (statusCodeEnum == StatusCode.FAIL) {
+                        System.out.println("You dont have a shield equipped");
+                    }
+                } else {
+                    System.out.println("I did not understand, what you are trying to unequip");
                 }
+
 
             } else {
                 System.out.println("I don't understand that. Please try again :)");
@@ -360,8 +383,9 @@ public class Adventure {
                  11) Type 'eat', to eat something.
                  12) Type 'drink', to drink something.
                  13) Type 'attack', to attack to attack enemies.
-                 14) Type 'equip', to equip a weapon.
-                 15) Type 'unequip weapon', to un-equip a weapon.
+                 14) Type 'equip ', followed by the name of the item you wish to equip, to equip it.
+                 15) Type 'unequip weapon', to un-equip your weapon.
+                 16) Type 'unequip shield', to un-equip your shield.
                  I wish you the best of luck!
                  XOXO, Gossip girl \uD83D\uDE09
                 """;
