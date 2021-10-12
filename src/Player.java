@@ -2,16 +2,13 @@ import java.util.ArrayList;
 
 public class Player extends Character {
 
-    private int HP;
-    private int maxHP = 50;
-    private Room currentRoom;
     private int weight;
     private final int weightLimit = 25;
     private int energy = 100;
-    private final ArrayList<Item> inventory = new ArrayList<>();
 
     public Player() {
-        this.HP = maxHP;
+        maxHitPoints = 50;
+        hitPoints = maxHitPoints;
         this.equippedWeapon = new MeleeWeapon("sword", "short sword", "a short sword", 5, 10);
     }
 
@@ -31,7 +28,7 @@ public class Player extends Character {
 
     // returns a formatted string with info about the player
     public String getInfo() {
-        return "Health: \t" + HP + "/" + maxHP + "\n" +
+        return "Health: \t" + hitPoints + "/" + maxHitPoints + "\n" +
                 "Weight: \t" + weight + "/" + weightLimit + "\n" +
                 "Energy: \t" + energy + "/100\t";
     }
@@ -80,10 +77,10 @@ public class Player extends Character {
 
             //checks if item has an item of type Food
             if (item instanceof Food) {
-                HP += ((Food) item).getHealth();
+                hitPoints += ((Food) item).getHealth();
                 //Makes sure that player HP does not exceed maxHP.
-                if (HP > maxHP) {
-                    HP = 50;
+                if (hitPoints > maxHitPoints) {
+                    hitPoints = 50;
                 }
                 inventory.remove(item);
                 return StatusCode.SUCCESS;
@@ -106,24 +103,8 @@ public class Player extends Character {
         return null;
     }
 
-    public Enum<StatusCode> attack(Character target) {
-        if (target != null) {
-            if (equippedWeapon != null) {
-                return equippedWeapon.attack(target);
-            } else {
-                return StatusCode.NO_WEAPON_IN_SLOT;
-            }
-        } else {
-            return StatusCode.DOES_NOT_EXIST;
-        }
-    }
-
-    public ArrayList<Item> getInventory() {
-        return inventory;
-    }
-
     public String health() {
-        return "Health: \t" + getHP() + "/" + getMaxHP();
+        return "Health: \t" + getHitPoints() + "/" + getMaxHitPoints();
     }
 
     //Updates energyUpdate with 25 points.
@@ -142,36 +123,12 @@ public class Player extends Character {
         setEnergy(energy);
     }
 
-    public int getHP() {
-        return HP;
-    }
-
-    public void setHP(int HP) {
-        this.HP = HP;
-    }
-
-    public int getMaxHP() {
-        return maxHP;
-    }
-
-    public void setMaxHP(int maxHP) {
-        this.maxHP = maxHP;
-    }
-
     public int getEnergy() {
         return energy;
     }
 
     public void setEnergy(int energy) {
         this.energy = energy;
-    }
-
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
-    public Room getCurrentRoom() {
-        return currentRoom;
     }
 
     public Enum<StatusCode> equipWeapon(Item tmpItem) {
@@ -210,17 +167,6 @@ public class Player extends Character {
             return StatusCode.SUCCESS;
         } else {
             return StatusCode.FAIL;
-        }
-    }
-
-    @Override
-    public Enum<StatusCode> takeDamage(int damage) {
-        HP -= damage;
-
-        if (HP <= 0){
-            return StatusCode.DIED;
-        } else {
-            return StatusCode.SUCCESS;
         }
     }
 }

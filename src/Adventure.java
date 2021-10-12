@@ -201,7 +201,7 @@ public class Adventure {
 
                 if (statusCode == StatusCode.SUCCESS) {
                     System.out.println("you have attacked " + tempEnemy.getName()
-                            + ", and has " + tempEnemy.getHealth() + " health left");
+                            + ", and has " + tempEnemy.getHitPoints() + " health left");
 
                 } else if (statusCode == StatusCode.DIED) {
                     tempEnemy.die();
@@ -266,7 +266,7 @@ public class Adventure {
                             // prints the proper respons to the user, and if the player died the game stops
                             if (statusCodeEnum == StatusCode.SUCCESS) {
                                 System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, you now have "
-                                        + player.getHP() + " HP" + Color.RESET_COLOR);
+                                        + player.getHitPoints() + " HP" + Color.RESET_COLOR);
 
                             } else if (statusCodeEnum == StatusCode.FAIL) {
                                 System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, but did not hit" + Color.RESET_COLOR);

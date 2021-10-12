@@ -5,41 +5,27 @@ public class Enemy extends Character{
     // TODO: 08/10/2021 add functionality to Class, should the enemy move around?
 
     private String name;
-    private int health;
-    private Room currentRoom;
-    private ArrayList<Item> inventory = new ArrayList<>();
     private boolean isAgressive;
 
     public boolean isAgressive() {
         return isAgressive;
     }
 
-    public Enemy(String name, int health, Weapon weapon, Room currentRoom, boolean isAgressive) {
+    public Enemy(String name, int hitPoints, Weapon weapon, Room currentRoom, boolean isAgressive) {
         this.name = name;
-        this.health = health;
+        this.hitPoints = hitPoints;
         this.equippedWeapon = weapon;
         this.currentRoom = currentRoom;
         this.isAgressive = isAgressive;
     }
 
+    @Override
     public Enum<StatusCode> takeDamage(int damage){
-        health -= damage;
+        // checks if the enemy is aggressive, if not then set to be aggressicve
         if (!isAgressive){
             isAgressive = true;
         }
-        if (health <= 0){
-            return StatusCode.DIED;
-        } else {
-            return StatusCode.SUCCESS;
-        }
-    }
-
-    public Enum<StatusCode> attack(Character player) {
-        if (equippedWeapon != null){
-            return equippedWeapon.attack(player);
-        } else {
-            return StatusCode.NO_WEAPON_IN_SLOT;
-        }
+        return super.takeDamage(damage);
     }
 
     public void follow(String userInput){
@@ -67,15 +53,7 @@ public class Enemy extends Character{
         return name;
     }
 
-    public int getHealth() {
-        return health;
-    }
-
     public Item getWeapon() {
         return equippedWeapon;
-    }
-
-    public Room getCurrentRoom() {
-        return currentRoom;
     }
 }
