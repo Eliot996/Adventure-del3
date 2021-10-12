@@ -4,6 +4,7 @@ public abstract class Character {
 
     protected Room currentRoom;
     protected Weapon equippedWeapon;
+    protected Shield equippedShield;
     protected int hitPoints;
     protected int maxHitPoints;
     protected final ArrayList<Item> inventory = new ArrayList<>();
@@ -22,7 +23,12 @@ public abstract class Character {
     }
 
     public Enum<StatusCode> takeDamage(int damage) {
-        hitPoints -= damage;
+
+        if (equippedShield != null){
+            hitPoints -= (damage - equippedShield.block(damage));
+        } else {
+            hitPoints -= damage;
+        }
 
         if (hitPoints <= 0){
             return StatusCode.DIED;
