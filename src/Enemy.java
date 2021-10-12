@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Enemy extends Character{
 
-    // TODO: 08/10/2021 add functionality to Class, like dies, drop items, attact,
-    //  wrether or not the enemy will attact on sight, should the enemy move around?
+    // TODO: 08/10/2021 add functionality to Class, like dies, drop items, should the enemy move around?
+    //                                                   follow the player if agressive
 
     private String name;
     private int health;

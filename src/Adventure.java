@@ -183,10 +183,13 @@ public class Adventure {
 
                 Enemy tempEnemy = getEnemyFromName(userInput);
                 Enum<StatusCode> statusCode = player.attack(tempEnemy);
+
                 if (statusCode == StatusCode.SUCCESS) {
-                    System.out.println("you have attacked " + tempEnemy.getName());
-                    System.out.println("enemy health: " + tempEnemy.getHealth());
-                }else if(statusCode == StatusCode.DOES_NOT_EXIST){
+                    System.out.println("you have attacked " + tempEnemy.getName()
+                            + ", and has " + tempEnemy.getHealth() + " health left");
+                }else if (statusCode == StatusCode.NO_WEAPON_IN_SLOT){
+                    System.out.println("Attacking the " + tempEnemy.getName() + " with your bare hands, are not a good idea");
+                } else if(statusCode == StatusCode.DOES_NOT_EXIST){
                     System.out.println("There is no enemy by that name in the room");
                 }
 
@@ -236,7 +239,11 @@ public class Adventure {
                         // TODO: 11/10/2021 if the enemy is aggressive attack player
                         if (enemy.isAgressive()){
                             Enum<StatusCode> statusCodeEnum = enemy.attack(player);
-                            System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked player, but did not hit");
+                            if (statusCodeEnum == StatusCode.SUCCESS){
+                                System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, you now have "
+                                        + player.getHP() + " HP");
+                            } else if(statusCodeEnum == StatusCode.FAIL)
+                            System.out.println(Color.BRIGHT_RED + enemy.getName() + " attacked you, but did not hit");
                         }
                     }
                 }
