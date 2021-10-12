@@ -65,13 +65,28 @@ public class Adventure {
                 // energy cost
                 player.energyUpdate(-5);
 
-                // prints respos to moving
-                System.out.println(player.goTo(userInput));
+                // try to move, and catch statusCode
+                Enum<StatusCode> statusCodeEnum = player.goTo(userInput);
 
-                // if the player has moved to a differnt room, clear enemies in room and
+                // if the player has moved to a differnt room, make aggressive enemies try to follow the player into the next room
                 if (savedRoom != player.getCurrentRoom()) {
+                    for (Enemy enemy : enemiesInRoom) {
+                        if (enemy.isAgressive()){
+                            enemy.follow(userInput);
+                        }
+                    }
                     enemiesInRoom.clear();
                     enemiesInRoom = getEnemiesInCurrentRoom();
+                }
+
+                // prints respons to moving
+                if ( statusCodeEnum == StatusCode.SUCCESS){
+                    System.out.println(player.getCurrentRoom().visitRoom());
+                    if ( enemiesInRoom.size() > 0){
+                        System.out.println(getStringOfEnemiesInCurrentRoom());
+                    }
+                } else if (statusCodeEnum == StatusCode.FAIL){
+                    System.out.println("You cannot go that way in this room");
                 }
 
             } else if (userInput.startsWith("exit")) {
@@ -252,15 +267,10 @@ public class Adventure {
     }
 
 
-    public String look() { // TODO: 08/10/2021 refactor
-        StringBuilder returnString = new StringBuilder(player.getCurrentRoom().getDescription() + "\n" +
-                player.getCurrentRoom().getItems());
-
-        for (Enemy enemy : enemiesInRoom) {
-                returnString.append("\nYou also see a ").append(enemy.getName()).append(" in the room");
-        }
-
-        return returnString.toString();
+    public String look() {
+        return player.getCurrentRoom().getDescription() + "\n" +
+                player.getCurrentRoom().getItems() + "\n" +
+                getStringOfEnemiesInCurrentRoom();
     }
 
     public ArrayList<Enemy> getEnemiesInCurrentRoom(){
@@ -280,6 +290,16 @@ public class Adventure {
             }
         }
         return currentEnemies;
+    }
+
+    public String getStringOfEnemiesInCurrentRoom(){
+        StringBuilder returnString = new StringBuilder("\nYou also see: \n");
+
+        for (Enemy enemy : enemiesInRoom) {
+            returnString.append(enemy.getName()).append(" in the room" + '\n');
+        }
+
+        return returnString.toString();
     }
 
     public String inspect(String itemName) {
