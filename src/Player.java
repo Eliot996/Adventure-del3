@@ -9,7 +9,7 @@ public class Player extends Character {
     public Player() {
         maxHitPoints = 50;
         hitPoints = maxHitPoints;
-        this.equippedWeapon = new MeleeWeapon("sword", "short sword", "a short sword", 5, 10);
+        this.equippedWeapon = new RangedWeapon("gun", "a gun", "...", 5, 2,5);
     }
 
     public Enum<StatusCode> goTo(String userInput) {
@@ -168,5 +168,10 @@ public class Player extends Character {
         } else {
             return StatusCode.FAIL;
         }
+    }
+
+    @Override
+    public Enum<StatusCode> useAmmo(int ammo) {
+        return null;
     }
 }

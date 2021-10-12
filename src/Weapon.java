@@ -5,7 +5,9 @@ public abstract class  Weapon extends Item{
         super(shortName, longName, description, weight);
     }
 
-    public abstract Enum<StatusCode> attack(Character taget);
+    public abstract Enum<StatusCode> attack(Character target);
 
-    public abstract int ammoLeft();
+    public int useAmmo(){
+        return useAmmo();
+    }
 }
