@@ -40,6 +40,8 @@ public abstract class Character {
         return hitPoints;
     }
 
+    public abstract Enum<StatusCode> useAmmo(int ammo);
+
     public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
     }

@@ -1,20 +1,22 @@
 public class RangedWeapon extends Weapon{
 
     private int ammo;
+    private int damage;
 
 
-    public RangedWeapon(String shortName, String longName, String description, int weight, int ammo) {
+    public RangedWeapon(String shortName, String longName, String description, int weight, int ammo, int damage) {
         super(shortName, longName, description, weight);
         this.ammo = ammo;
+        this.damage = damage;
     }
 
     public Enum<StatusCode> attack(Character target){
-        return StatusCode.FAIL;
-    }
+        if(ammo > 0) {
+            ammo--;
+            return target.takeDamage(damage);
+        }else
 
-    @Override
-    public int ammoLeft() {
-        return ammo;
+        return StatusCode.NO_AMMO_LEFT;
     }
 
     public int getAmmo() {

@@ -216,6 +216,8 @@ public class Adventure {
 
                 } else if (statusCode == StatusCode.DOES_NOT_EXIST) {
                     System.out.println("There is no enemy by that name in the room");
+                } else if (statusCode == StatusCode.NO_AMMO_LEFT){
+                    System.out.println("You are out of ammunition");
                 }
 
             } else if (userInput.startsWith("equip ")) {
