@@ -29,6 +29,22 @@ public class Room {
         return null;
     }
 
+    public Room getRoomFromDirectionName(String userInput){
+        if ((userInput.equals("north") || userInput.equals("n")) && hasNorth()) {
+            return getNorth();
+        }
+        if ((userInput.equals("south") || userInput.equals("s")) && hasSouth()) {
+            return getSouth();
+        }
+        if ((userInput.equals("east") || userInput.equals("e")) && hasEast()) {
+            return getEast();
+        }
+        if ((userInput.equals("west") || userInput.equals("w")) && hasWest()) {
+            return getWest();
+        }
+        return null;
+    }
+
     public String getItems() {
         if (itemsInRoom.size() > 0) {
             StringBuilder items = new StringBuilder("You found these items:\n");

@@ -1,3 +1,4 @@
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 
 public class Player extends Character {
@@ -15,24 +16,18 @@ public class Player extends Character {
         this.equippedWeapon = new MeleeWeapon("sword", "short sword", "a short sword", 5, 10);
     }
 
-    public String goTo(String userInput) { // TODO: 12/10/2021 Decouple - make call a function in room
-        if ((userInput.equals("north") || userInput.equals("n")) && getCurrentRoom().hasNorth()) {
-            currentRoom = currentRoom.getNorth();
-            return currentRoom.visitRoom();
+    public Enum<StatusCode> goTo(String userInput) {
+        // gets the target room from the userInput, and save it in targetRoom
+        Room targetRoom = currentRoom.getRoomFromDirectionName(userInput);
+
+        // if the target room is not null, then set the currentRoom to targetRoom and return visitRoom.
+        // else return error message
+        if (targetRoom != null){
+            currentRoom = targetRoom;
+            return StatusCode.SUCCESS;
+        }else{
+            return StatusCode.DOES_NOT_EXIST;
         }
-        if ((userInput.equals("south") || userInput.equals("s")) && getCurrentRoom().hasSouth()) {
-            currentRoom = currentRoom.getSouth();
-            return currentRoom.visitRoom();
-        }
-        if ((userInput.equals("east") || userInput.equals("e")) && getCurrentRoom().hasEast()) {
-            currentRoom = currentRoom.getEast();
-            return currentRoom.visitRoom();
-        }
-        if ((userInput.equals("west") || userInput.equals("w")) && getCurrentRoom().hasWest()) {
-            currentRoom = currentRoom.getWest();
-            return currentRoom.visitRoom();
-        }
-        return "You cannot go that direction in this room";
     }
 
     // returns a formatted string with info about the player
