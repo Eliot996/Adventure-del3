@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Player extends Character{
+public class Player extends Character {
 
     private int HP;
     private int maxHP = 50;
@@ -15,7 +15,7 @@ public class Player extends Character{
         this.equippedWeapon = new MeleeWeapon("sword", "short sword", "a short sword", 5, 10);
     }
 
-    public String goTo(String userInput) {
+    public String goTo(String userInput) { // TODO: 12/10/2021 Decouple - make call a function in room
         if ((userInput.equals("north") || userInput.equals("n")) && getCurrentRoom().hasNorth()) {
             currentRoom = currentRoom.getNorth();
             return currentRoom.visitRoom();
@@ -36,7 +36,6 @@ public class Player extends Character{
     }
 
     // returns a formatted string with info about the player
-    // TODO: add info to getInfo, add energy?
     public String getInfo() {
         return "Health: \t" + HP + "/" + maxHP + "\n" +
                 "Weight: \t" + weight + "/" + weightLimit + "\n" +
@@ -57,7 +56,7 @@ public class Player extends Character{
 
     // drops item from user inventory and adds it to the current room, as well as subtracts the weight of the item from players weight
     public Enum<StatusCode> dropItem(Item item) {
-        if (item != null){
+        if (item != null) {
             itemsInInventory.remove(item);
             currentRoom.addItem(item);
             return StatusCode.SUCCESS;
@@ -74,31 +73,31 @@ public class Player extends Character{
                 weight += item.getWeight();
                 return StatusCode.SUCCESS;
             } else {
-              return StatusCode.FAIL;
+                return StatusCode.FAIL;
             }
         } else {
             return StatusCode.DOES_NOT_EXIST;
         }
     }
 
-    public Enum<StatusCode> eatItem(Item item){
+    public Enum<StatusCode> eatItem(Item item) {
         //Checks if item is in the current room.
-        if(item != null) {
+        if (item != null) {
 
             //checks if item has an item of type Food
             if (item instanceof Food) {
                 HP += ((Food) item).getHealth();
                 //Makes sure that player HP does not exceed maxHP.
-                if(HP > maxHP){
+                if (HP > maxHP) {
                     HP = 50;
                 }
                 itemsInInventory.remove(item);
                 return StatusCode.SUCCESS;
 
-                }else {
+            } else {
                 return StatusCode.FAIL;
             }
-        }else {
+        } else {
             return StatusCode.DOES_NOT_EXIST;
         }
 
@@ -115,14 +114,14 @@ public class Player extends Character{
 
     public Enum<StatusCode> attack(Character target) {
         if (target != null) {
-            if (equippedWeapon != null){
+            if (equippedWeapon != null) {
                 return equippedWeapon.attack(target);
             } else {
                 return StatusCode.NO_WEAPON_IN_SLOT;
             }
         } else {
             return StatusCode.DOES_NOT_EXIST;
-    }
+        }
     }
 
     public ArrayList<Item> getItemsInInventory() {
@@ -143,7 +142,7 @@ public class Player extends Character{
         int energy = getEnergy();
         energy += energyUpdate;
         //makes sure that energy does not exceed 100.
-        if(energy > 100){
+        if (energy > 100) {
             energy = 100;
         }
         setEnergy(energy);
@@ -183,13 +182,13 @@ public class Player extends Character{
 
     public Enum<StatusCode> equipWeapon(Item tmpItem) {
         // checks if there tmpItem contains an item
-        if(tmpItem != null) {
+        if (tmpItem != null) {
 
             // checks if tmpItem has an item of type Weapon
             if (tmpItem instanceof Weapon) {
 
                 // checks if equippedWeapon is empty
-                if (equippedWeapon == null){
+                if (equippedWeapon == null) {
                     // if the slot is empty, add tmpItem to equippedWeapon and remove it from the inventory,
                     // and return SUCCESS
                     equippedWeapon = (Weapon) tmpItem;
@@ -200,18 +199,18 @@ public class Player extends Character{
                     // if the slot is not empty, return SLOT_NOT_EMPTY
                     return StatusCode.SLOT_NOT_EMPTY;
                 }
-            }else {
+            } else {
                 // if tmpItem is of wrong type return FAIL
                 return StatusCode.FAIL;
             }
-        }else {
+        } else {
             // if tmpItem is empty, return DOES_NOT_EXIST
             return StatusCode.DOES_NOT_EXIST;
         }
     }
 
     public Enum<StatusCode> unEquipWeapon() {
-        if (equippedWeapon != null){
+        if (equippedWeapon != null) {
             itemsInInventory.add(equippedWeapon);
             equippedWeapon = null;
             return StatusCode.SUCCESS;
