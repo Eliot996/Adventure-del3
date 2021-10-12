@@ -11,4 +11,9 @@ public class MeleeWeapon extends Weapon{
         target.takeDamage(damage);
         return StatusCode.SUCCESS;
     }
+
+    @Override
+    public int ammoLeft() {
+        return -1;
+    }
 }

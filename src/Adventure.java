@@ -167,10 +167,10 @@ public class Adventure {
                 // get the item from the players inventory,
                 Item tmpItem = player.getItemFromName(userInput);
 
-                // drop the item from player inventory, and get statuscode
+                // drop the item from player inventory, and get statusCode
                 Enum<StatusCode> statusCode = player.dropItem(tmpItem);
 
-                // depending on the statuscode the user will get the right respons
+                // depending on the statusCode the user will get the right response
                 if (statusCode == StatusCode.SUCCESS) {
                     System.out.println("You have dropped " + tmpItem.getShortName());
                 } else if (statusCode == StatusCode.FAIL) {
@@ -250,6 +250,7 @@ public class Adventure {
                 if (enemiesInRoom.size() > 0){
                     for (Enemy enemy : enemiesInRoom){
                         // TODO: 11/10/2021 if enemy has no health left, call dies()
+
 
                         // TODO: 11/10/2021 if the enemy is aggressive attack player
                         if (enemy.isAgressive()){

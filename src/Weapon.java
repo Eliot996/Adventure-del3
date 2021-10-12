@@ -6,4 +6,6 @@ public abstract class  Weapon extends Item{
     }
 
     public abstract Enum<StatusCode> attack(Character taget);
+
+    public abstract int ammoLeft();
 }

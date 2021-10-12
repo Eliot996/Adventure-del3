@@ -140,6 +140,7 @@ public class Map {
         map[22].addItem(new Food("tart", "a warm and delicious tart", "This will give you some well-deserved energy.", 3, 2));
         map[23].addItem(new Food("Ham", "a big piece of ham", "This piece of ham will save your life", 3, 5));
 
+
     }
 
     public Room[] getMap() {
