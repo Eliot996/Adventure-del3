@@ -16,11 +16,13 @@ public class Room {
         this.description = description;
     }
 
+    // adds the given item to itemsInRoom
     public Item addItem(Item item) {
         itemsInRoom.add(item);
         return item;
     }
 
+    // removes the given item from itemsInRoom
     public Item removeItem(Item item) {
         if (itemsInRoom.contains(item)) {
             itemsInRoom.remove(item);
@@ -29,6 +31,8 @@ public class Room {
         return null;
     }
 
+    // takes a string to match with the name of the direction,
+    // and if the room has a connection that way, it will return the room
     public Room getRoomFromDirectionName(String userInput){
         if ((userInput.equals("north") || userInput.equals("n")) && hasNorth()) {
             return getNorth();
@@ -45,6 +49,7 @@ public class Room {
         return null;
     }
 
+    // will return a formatted String of the items in the room
     public String getItems() {
         if (itemsInRoom.size() > 0) {
             StringBuilder items = new StringBuilder("You found these items:\n");
@@ -94,6 +99,7 @@ public class Room {
         return description;
     }
 
+    // returns the name of the room, and if the player has not visited the room before, also the description
     public String visitRoom() {
         StringBuilder returnString = new StringBuilder(name + "\n");
 
