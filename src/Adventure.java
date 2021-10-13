@@ -7,7 +7,6 @@ public class Adventure {
     private ArrayList<Enemy> enemiesInRoom;
     private final Map mapOfGame;
     private final Player player;
-    private boolean isInCombat = false;
     Scanner input = new Scanner(System.in);
 
     public Adventure() {
@@ -19,10 +18,10 @@ public class Adventure {
         player.setCurrentRoom(mapOfGame.getMap()[0]);
 
         // makes an enemy, and gets the enemies in the first room
-        //enemies.add(new Enemy("orc", 11,
-        //       new MeleeWeapon("sword", "a really heavy and shiny sword", "This sword will kill with skill", 10, 10),
-        //       mapOfGame.getMap()[0], true));
-        enemiesInRoom = getEnemiesInCurrentRoom();
+        /*enemies.add(new Enemy("orc", 11,
+               new MeleeWeapon("sword", "a really heavy and shiny sword", "This sword will kill with skill", 10, 10),
+               mapOfGame.getMap()[0], true));
+        enemiesInRoom = getEnemiesInCurrentRoom();*/
     }
 
     public void play() {
@@ -71,6 +70,7 @@ public class Adventure {
 
                 // if the player has moved to a differnt room, make aggressive enemies try to follow the player into the next room
                 if (savedRoom != player.getCurrentRoom()) {
+
                     for (Enemy enemy : enemiesInRoom) {
                         if (enemy.isAgressive()) {
                             enemy.follow(userInput);
@@ -281,7 +281,6 @@ public class Adventure {
             }
 
             // This block handles the enemy side of combat, and interaction
-            if (isInCombat) {
                 // check if there are enemies in room
                 if (enemiesInRoom.size() > 0) {
                     for (Enemy enemy : enemiesInRoom) {
@@ -306,7 +305,6 @@ public class Adventure {
                         }
                     }
                 }
-            }
         }
     }
 
@@ -333,11 +331,6 @@ public class Adventure {
             // if the enemy is in the same room as the player, add to the list
             if (enemy.getCurrentRoom() == player.getCurrentRoom()) {
                 currentEnemies.add(enemy);
-            }
-
-            // if the enemy is aggresive, set combat to true
-            if (enemy.isAgressive()){
-                isInCombat = true;
             }
         }
         return currentEnemies;
