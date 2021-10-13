@@ -7,6 +7,7 @@ public class Adventure {
     private ArrayList<Enemy> enemiesInRoom;
     private final Map mapOfGame;
     private final Player player;
+    private boolean isInCombat = false;
     Scanner input = new Scanner(System.in);
 
     public Adventure() {
@@ -376,7 +377,7 @@ public class Adventure {
                  10) Type 'health', to see your health information.
                  11) Type 'eat', to eat something.
                  12) Type 'drink', to drink something.
-                 13) Type 'attack', to attack to attack enemies.
+                 13) Type 'attack', to attack enemies.
                  14) Type 'equip ', followed by the name of the item you wish to equip, to equip it.
                  15) Type 'unequip weapon', to un-equip your weapon.
                  16) Type 'unequip shield', to un-equip your shield.

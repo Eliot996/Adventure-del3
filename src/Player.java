@@ -7,6 +7,8 @@ public class Player extends Character {
     public Player() {
         maxHitPoints = 50;
         hitPoints = maxHitPoints;
+        this.equippedWeapon = new RangedWeapon("gun", "a gun", "this is a gun", 5, 10,5);
+        this.equippedShield = new Shield("shield", "a Shield", "this is a shield", 5, 60, 0.60);
     }
 
     public Enum<StatusCode> goTo(String userInput) {

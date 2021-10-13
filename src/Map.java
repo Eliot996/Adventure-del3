@@ -136,19 +136,20 @@ public class Map {
         map[0].addItem(new Item("club", "an oak club", "This club is your only defence XD", 7));
         map[7].addItem(new Item("pillow", "a soft and fluffy pillow", "This pillow is so fluffy i'm gonna die", 5));
         map[9].addItem(new Food("soup", "good soup \uD83D\uDC4C", "A bowl of good soup", 3, -5));
-        map[18].addItem(new Item("treasure", "a jar of gold", "you've gotten the jar of gold!", 15));
+        map[0].addItem(new Item("gold", "jar of gold", "you've gotten the jar of gold!", 15));
         map[19].addItem(new Food("potion", "potion to heal", "This magical potion will heal your injuries.", 10, 25));
         map[22].addItem(new Food("beer", "a cold pint of beer", "This will quench your thirst.", 3, 2));
         map[22].addItem(new Food("Red wine", "a delicious glass of goodness", "This will fill you with joy", 7, 2));
         map[22].addItem(new Food("tart", "a warm and delicious tart", "This will give you some well-deserved energy.", 3, 2));
         map[23].addItem(new Food("Ham", "a big piece of ham", "This piece of ham will save your life", 3, 5));
-        map[0].addItem(new Item("map", "a map of the castle", mapDisc(), 10));
+        map[0].addItem(new Item("map", "a map of the adventure game", mapDescription(), 10));
+
 
 
 
     }
 
-    public String mapDisc(){
+    public String mapDescription(){
         return """
                  ___________________     __________________
                 |                  |    |                 |
