@@ -19,10 +19,10 @@ public class Adventure {
         player.setCurrentRoom(mapOfGame.getMap()[0]);
 
         // makes an enemy, and gets the enemies in the first room
-        /*enemies.add(new Enemy("orc", 11,
+        enemies.add(new Enemy("orc", 11,
                new MeleeWeapon("sword", "a really heavy and shiny sword", "This sword will kill with skill", 10, 10),
                mapOfGame.getMap()[0], true));
-        enemiesInRoom = getEnemiesInCurrentRoom();*/
+        enemiesInRoom = getEnemiesInCurrentRoom();
     }
 
     public void play() {
@@ -87,7 +87,7 @@ public class Adventure {
                     if (enemiesInRoom.size() > 0) {
                         System.out.println(getStringOfEnemiesInCurrentRoom());
                     }
-                } else if (statusCodeEnum == StatusCode.FAIL) {
+                } else if (statusCodeEnum == StatusCode.DOES_NOT_EXIST) {
                     System.out.println("You cannot go that way in this room");
                 }
 
@@ -277,6 +277,13 @@ public class Adventure {
                 }
 
 
+            } else if(userInput.startsWith("leave castle") || userInput.startsWith("leave")) {
+                if (player.getItemFromName("gold") != null
+                        && player.getCurrentRoom() == mapOfGame.getMap()[21]){
+                    gameActive = false;
+                    System.out.println(Color.BRIGHT_GREEN + "Congratulations you successfully retrieved the jar of gold, " +
+                            "and you won the game!");
+                }
             } else {
                 System.out.println("I don't understand that. Please try again :)");
             }
