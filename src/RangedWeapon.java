@@ -1,12 +1,14 @@
 public class RangedWeapon extends Weapon{
 
     private int ammo;
-    private int damage;
+    private final int maxAmmo;
+    private final int damage;
 
 
     public RangedWeapon(String shortName, String longName, String description, int weight, int ammo, int damage) {
         super(shortName, longName, description, weight);
-        this.ammo = ammo;
+        this.maxAmmo = ammo;
+        this.ammo = this.maxAmmo;
         this.damage = damage;
     }
 
@@ -25,5 +27,12 @@ public class RangedWeapon extends Weapon{
 
     public void setAmmo(int ammo) {
         this.ammo = ammo;
+    }
+
+    @Override
+    public String getDescription(){
+        return super.getDescription() + '\n' +
+                "Damage: " + damage  + '\n' +
+                "Ammo: " + ammo + '/' + maxAmmo;
     }
 }

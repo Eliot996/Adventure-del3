@@ -11,4 +11,9 @@ public class MeleeWeapon extends Weapon{
         return target.takeDamage(damage);
     }
 
+    @Override
+    public String getDescription(){
+        return super.getDescription() + '\n' +
+                "Damage: " + damage  + '\n';
+    }
 }

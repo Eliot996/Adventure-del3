@@ -20,7 +20,8 @@ public class Item {
     }
 
     public String getDescription() {
-        return description;
+        return description + '\n' +
+                "Weight: " + weight;
     }
 
     public int getWeight() {

@@ -1,10 +1,12 @@
 public class Shield extends Item{
     private int durability;
+    private final int maxDurability;
     private final double blockEffect;
 
     public Shield(String shortName, String longName, String description, int weight, int durability, double blockEffect) {
         super(shortName, longName, description, weight);
-        this.durability = durability;
+        this.maxDurability = durability;
+        this.durability = this.maxDurability;
         this.blockEffect = blockEffect;
     }
 
@@ -25,5 +27,12 @@ public class Shield extends Item{
 
     public double getBlockEffect() {
         return blockEffect;
+    }
+
+    @Override
+    public String getDescription(){
+        return super.getDescription() + '\n' +
+                "Durability: " + durability + '/' + maxDurability + '\n' +
+                "Amount of damage blocked: " + (int) (blockEffect * 100) + '%';
     }
 }
