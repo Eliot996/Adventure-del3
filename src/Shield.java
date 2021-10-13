@@ -10,6 +10,8 @@ public class Shield extends Item{
         this.blockEffect = blockEffect;
     }
 
+    // calculates the amount of damage the shield blocked and deals damage to the shield,
+    // and returns the amount of damage blocked
     public int block(int damage){
         if (durability > 0) {
             int damageBlocked = (int) Math.ceil(blockEffect * damage);
