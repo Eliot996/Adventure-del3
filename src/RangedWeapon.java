@@ -12,11 +12,12 @@ public class RangedWeapon extends Weapon{
         this.damage = damage;
     }
 
+    // attacks if there is ammo left in the weapon, else returns no ammo left
     public Enum<StatusCode> attack(Character target){
         if(ammo > 0) {
             ammo--;
             return target.takeDamage(damage);
-        }else
+        }
 
         return StatusCode.NO_AMMO_LEFT;
     }
