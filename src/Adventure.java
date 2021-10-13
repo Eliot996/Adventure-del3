@@ -20,7 +20,7 @@ public class Adventure {
 
         // makes an enemy, and gets the enemies in room18
         enemies.add(new Enemy("orc", 11,
-               new MeleeWeapon("sword", "a really heavy and shiny sword", "This sword will kill with skill", 10, 10),
+               new MeleeWeapon("sword", "a really heavy and shiny sword", "This sword will kill with skill", 9, 10),
                mapOfGame.getMap()[17], true));
 
         // makes an enemy, and gets the enemies in room22
@@ -29,24 +29,24 @@ public class Adventure {
                 mapOfGame.getMap()[21], true));
 
         // makes an enemy, and gets the enemies in room10
-        enemies.add(new Enemy("unicorn", 3,
+        enemies.add(new Enemy("unicorn", 11,
                 new MeleeWeapon("horn", "a magical and glittery horn", "This horn can stab anything", 5, 2),
-                mapOfGame.getMap()[9], false));
+                mapOfGame.getMap()[9], true));
 
         // makes an enemy, and gets the enemies in room23
-        enemies.add(new Enemy("blemmyes", 5,
+        enemies.add(new Enemy("blemmyes", 11,
                 new MeleeWeapon("club", "a wooden club", "This club can smash", 4, 6),
                 mapOfGame.getMap()[22], true));
 
         // makes an enemy, and gets the enemies in room16
-        enemies.add(new Enemy("giant", 5,
-                new MeleeWeapon("axe", "a bloody axe", "This axe can behead someone in one blow", 10, 10),
-                mapOfGame.getMap()[15], false));
+        enemies.add(new Enemy("giant", 11,
+                new MeleeWeapon("axe", "a bloody axe", "This axe can behead someone in one blow", 6, 10),
+                mapOfGame.getMap()[15], true));
 
         // makes an enemy, and gets the enemies in room7
-        enemies.add(new Enemy("centaur", 5,
-                new MeleeWeapon("dagger", "thin yet strong dagger", "This dagger might seem flimsy but it's not", 10, 10),
-                mapOfGame.getMap()[6], false));
+        enemies.add(new Enemy("centaur", 11,
+                new MeleeWeapon("dagger", "thin yet strong dagger", "This dagger might seem flimsy but it's not", 8, 10),
+                mapOfGame.getMap()[6], true));
 
         enemiesInRoom = getEnemiesInCurrentRoom();
     }
@@ -414,7 +414,7 @@ public class Adventure {
                  14) Type 'equip ', followed by the name of the item you wish to equip, to equip it.
                  15) Type 'unequip weapon', to un-equip your weapon.
                  16) Type 'unequip shield', to un-equip your shield.
-                 17) Type 'leave' or 'leave castle', when you are in The Entrence with the jar of gold, to complete the game.
+                 17) Type 'leave' or 'leave castle', when you are in The Entrance with the jar of gold, to complete the game.
                  I wish you the best of luck!
                  XOXO, Gossip girl \uD83D\uDE09
                 """;

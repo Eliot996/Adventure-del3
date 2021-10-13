@@ -134,16 +134,32 @@ public class Map {
 
 
         //Added different items to different rooms
-        map[0].addItem(new Item("club", "an oak club", "This club is your only defence XD", 7));
-        map[7].addItem(new Item("pillow", "a soft and fluffy pillow", "This pillow is so fluffy i'm gonna die", 5));
+        map[0].addItem(new Food("apple", "red apple", "An apple a day, keeps the doctor away \uD83D\uDE09", 0, 2));
+        map[0].addItem(new Food("almonds", "a handful of almonds", "A bit of fuel to to keep you going", 0, 3));
+        map[0].addItem(new Food("apple", "green apple", "An apple a day, might not keep the doctor away", 0, -5));
+        map[4].addItem(new Food("elixir", "healing elixir", "This concoction of different herbs will heal you", 10, 25));
+        map[5].addItem(new Item("soap", "bar of soap", "this will make you smell much nicer \uD83D\uDE06", 0));
+        map[7].addItem(new Item("pillow", "a soft and fluffy pillow", "This pillow is so fluffy i'm gonna die", 1));
+        map[8].addItem(new Item("stockings", "multicolored stockings", "These pair of stockings will suit you XD", 0));
+        map[8].addItem(new Item("gown", "long gown", "This gown will make you prettier \uD83E\uDD29", 0));
+        map[8].addItem(new Item("shoes", "wooden shoes", "These pair of shoes are ugly", 0));
         map[9].addItem(new Food("soup", "good soup \uD83D\uDC4C", "A bowl of good soup", 3, -5));
-        map[0].addItem(new Item("gold", "jar of gold", "you've gotten the jar of gold!", 15));
+        map[18].addItem(new Item("gold", "jar of gold", "you've gotten the jar of gold!", 15));
+        map[12].addItem(new Item("map", "a map of the adventure game", mapDescription(), 10));
         map[19].addItem(new Food("potion", "potion to heal", "This magical potion will heal your injuries.", 10, 25));
-        map[22].addItem(new Food("beer", "a cold pint of beer", "This will quench your thirst.", 3, 2));
-        map[22].addItem(new Food("Red wine", "a delicious glass of goodness", "This will fill you with joy", 7, 2));
         map[22].addItem(new Food("tart", "a warm and delicious tart", "This will give you some well-deserved energy.", 3, 2));
-        map[23].addItem(new Food("Ham", "a big piece of ham", "This piece of ham will save your life", 3, 5));
-        map[0].addItem(new Item("map", "a map of the adventure game", mapDescription(), 10));
+        map[22].addItem(new Food("potatoes", "pot of freshly boiled potatoes", "This will fill you up", 0, -5));
+        map[23].addItem(new Food("beer", "a cold pint of beer", "This will quench your thirst.", 3, 5));
+        map[23].addItem(new Food("Red wine", "a delicious glass of goodness", "This will fill you with joy", 7, -5));
+        map[23].addItem(new Food("Ham", "a big piece of ham", "This piece of ham will save your life", 3, 10));
+        map[25].addItem(new Food("carrots", "basket full of carrots", "Carrots make your vision better", 3, 5));
+
+
+
+
+
+
+
 
 
 
