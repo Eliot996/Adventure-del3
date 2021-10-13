@@ -32,10 +32,12 @@ public class Player extends Character {
                 "Energy: \t" + energy + "/100\t";
     }
 
+    // returns a formatted string of the players inventory
     public String getFormattedInventory() {
         if (inventory.size() > 0) {
             StringBuilder items = new StringBuilder("You have these items in your inventory:\n");
 
+            // add the long name of the given item to the stringbuilder along with a linebreak
             for (Item item : inventory) {
                 items.append(item.getLongName()).append("\n");
             }
@@ -70,6 +72,7 @@ public class Player extends Character {
         }
     }
 
+    // attempts to eat the given item
     public Enum<StatusCode> eatItem(Item item) {
         //Checks if item is in the current room.
         if (item != null) {
@@ -81,6 +84,7 @@ public class Player extends Character {
                 if (hitPoints > maxHitPoints) {
                     hitPoints = 50;
                 }
+                // and removes item from the players inventory before returning success
                 inventory.remove(item);
                 return StatusCode.SUCCESS;
 
@@ -93,6 +97,7 @@ public class Player extends Character {
 
     }
 
+    // iterates through the items in the players inventory, and check the item name against the given itenName
     public Item getItemFromName(String itemName) {
         for (Item item : inventory) {
             if (item.getShortName().equalsIgnoreCase(itemName)) {
@@ -130,6 +135,7 @@ public class Player extends Character {
         this.energy = energy;
     }
 
+    // attempts to equip the item as a weapon
     public Enum<StatusCode> equipWeapon(Item tmpItem) {
         // checks if there tmpItem contains an item
         if (tmpItem != null) {
@@ -159,6 +165,7 @@ public class Player extends Character {
         }
     }
 
+    // attempts to equip the item as a shield
     public Enum<StatusCode> equipShield(Item tmpItem) {
         // checks if there tmpItem contains an item
         if (tmpItem != null) {
@@ -188,6 +195,7 @@ public class Player extends Character {
         }
     }
 
+    // attempts to unequip the weapon
     public Enum<StatusCode> unEquipWeapon() {
         if (equippedWeapon != null) {
             inventory.add(equippedWeapon);
@@ -198,6 +206,7 @@ public class Player extends Character {
         }
     }
 
+    // attempts to unequip the shield
     public Enum<StatusCode> unEquipShield() {
         if (equippedShield != null) {
             inventory.add(equippedShield);
