@@ -130,6 +130,7 @@ public class Map {
         map[22].setWest(map[23]);
         map[22].setEast(map[24]);
         map[24].setNorth(map[25]);
+        map[1].setWest(map[20]);
 
 
         //Added different items to different rooms
