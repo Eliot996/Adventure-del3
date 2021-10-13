@@ -9,7 +9,7 @@ public abstract class Character {
     protected int maxHitPoints;
     protected final ArrayList<Item> inventory = new ArrayList<>();
 
-
+    // attempts to attack the given target
     public Enum<StatusCode> attack(Character target) {
         if (target != null) {
             if (equippedWeapon != null) {
@@ -23,13 +23,14 @@ public abstract class Character {
     }
 
     public Enum<StatusCode> takeDamage(int damage) {
-
+        // if the character has a shield the use it to block some of the incoming damage
         if (equippedShield != null){
             hitPoints -= (damage - equippedShield.block(damage));
         } else {
             hitPoints -= damage;
         }
 
+        // check if dead, else return success
         if (hitPoints <= 0){
             return StatusCode.DIED;
         } else {
