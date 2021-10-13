@@ -107,7 +107,7 @@ public class Adventure {
                 System.out.println("Hopefully we'll see each other again :) ");
                 gameActive = false;
 
-            } else if (userInput.startsWith("look") || userInput.startsWith("l")) {
+            } else if (userInput.startsWith("look")) {
                 System.out.println(look());
 
             } else if (userInput.startsWith("help")) {
@@ -384,7 +384,7 @@ public class Adventure {
                  Here is some help for you. Hopefully this will make your journey easier:
                  1)  To move in and out of different rooms, combine 'go' with a direction,
                      such as north, south, east or west, or simply use the starting letter of the direction.
-                 2)  Type 'look' or 'l', to get a description of the room you are in.
+                 2)  Type 'look', to get a description of the room you are in.
                  3)  Type 'exit', to end the game.
                  4)  Type 'info', to get player information.
                  5)  Type 'take', to add an item to your inventory.
@@ -399,6 +399,7 @@ public class Adventure {
                  14) Type 'equip ', followed by the name of the item you wish to equip, to equip it.
                  15) Type 'unequip weapon', to un-equip your weapon.
                  16) Type 'unequip shield', to un-equip your shield.
+                 17) Type 'leave' or 'leave castle', when you are in The Entrence with the jar of gold, to complete the game.
                  I wish you the best of luck!
                  XOXO, Gossip girl \uD83D\uDE09
                 """;
