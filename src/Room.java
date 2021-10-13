@@ -98,7 +98,7 @@ public class Room {
         StringBuilder returnString = new StringBuilder(name + "\n");
 
         if (!hasBeenvisited) {
-            returnString.append(description).append("\n");
+            returnString.append(description);
             hasBeenvisited = true;
         }
 

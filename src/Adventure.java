@@ -357,12 +357,12 @@ public class Adventure {
 
     public String getStringOfEnemiesInCurrentRoom(){
         if (enemiesInRoom.size() > 0 ) {
-            StringBuilder returnString = new StringBuilder("\nYou also see: \n");
+            StringBuilder returnString = new StringBuilder("There is:");
 
             for (Enemy enemy : enemiesInRoom) {
-                returnString.append(enemy.getName()).append(" in the room" + '\n');
+                returnString.append('\n').append(enemy.getName());
             }
-
+            returnString.append(" in the room with you");
             return returnString.toString();
         } else {
             return null;
