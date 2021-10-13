@@ -142,7 +142,7 @@ public class Map {
         map[22].addItem(new Food("Red wine", "a delicious glass of goodness", "This will fill you with joy", 7, 2));
         map[22].addItem(new Food("tart", "a warm and delicious tart", "This will give you some well-deserved energy.", 3, 2));
         map[23].addItem(new Food("Ham", "a big piece of ham", "This piece of ham will save your life", 3, 5));
-        map[0].addItem(new Item("map", "a map of the adventure game", mapDisc(), 10));
+        map[0].addItem(new Item("map", "a map of the castle", mapDisc(), 10));
 
 
 
@@ -187,18 +187,15 @@ public class Map {
                                          ||                                                 ||
                                          ||                                                 ||
                                          ||                                                 ||
-                                         ||                                                 ||
-                                         ||                                                 ||
-                                         ||                                                 ||
                                          ||                ___________________      ___________________                               ___________________
                                          ||               |                   |    |                   |                             |                   |
-                                         ||               |    Storage room   | == |      Corridor     | =========================== |   The catacombs   |  
+                                         ||               |    Storage room   | == |      Corridor     | =========================== |   The catacombs   |
                                          ||               |___________________|    |___________________|                             |___________________|
                                          ||                        ||                       ||
          ___________________      ___________________      ___________________      ___________________
          |                  |    |                   |    |                   |    |                   |
          |      Pantry      | == |      Kitchen      | == |  Servant chambers | == |      Lavatory     |
-         |__________________|    |___________________|    |___________________|    |___________________|                    
+         |__________________|    |___________________|    |___________________|    |___________________|
                 """;
     }
 
