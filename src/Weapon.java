@@ -7,7 +7,4 @@ public abstract class  Weapon extends Item{
 
     public abstract Enum<StatusCode> attack(Character target);
 
-    public int useAmmo(){
-        return useAmmo();
-    }
 }

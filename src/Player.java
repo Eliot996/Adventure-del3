@@ -7,7 +7,7 @@ public class Player extends Character {
     public Player() {
         maxHitPoints = 50;
         hitPoints = maxHitPoints;
-        this.equippedWeapon = new RangedWeapon("gun", "a gun", "...", 5, 2,5);
+        this.equippedWeapon = new RangedWeapon("gun", "a gun", "...", 5, 10,5);
         this.equippedShield = new Shield("shield", "a Shield", "this is a shield", 5, 60, 0.60);
     }
 
@@ -206,10 +206,5 @@ public class Player extends Character {
         } else {
             return StatusCode.FAIL;
         }
-    }
-
-    @Override
-    public Enum<StatusCode> useAmmo(int ammo) {
-        return null;
     }
 }
