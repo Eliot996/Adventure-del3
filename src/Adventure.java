@@ -24,14 +24,29 @@ public class Adventure {
                mapOfGame.getMap()[17], true));
 
         // makes an enemy, and gets the enemies in room22
-        enemies.add(new Enemy("monopod", 11,
-                new MeleeWeapon("stick", "a sharp wooden stick", "This stick will hurt someone", 10, 10),
+        enemies.add(new Enemy("monopod", 10,
+                new MeleeWeapon("stick", "a sharp wooden stick", "This stick will hurt someone", 3, 5),
                 mapOfGame.getMap()[21], true));
 
-        // makes an enemy, and gets the enemies in room
-        enemies.add(new Enemy("unicorn", 11,
-                new MeleeWeapon("horn", "a magical and glittery horn", "This horn can stab anything", 10, 10),
-                mapOfGame.getMap()[25], true));
+        // makes an enemy, and gets the enemies in room10
+        enemies.add(new Enemy("unicorn", 3,
+                new MeleeWeapon("horn", "a magical and glittery horn", "This horn can stab anything", 5, 2),
+                mapOfGame.getMap()[9], false));
+
+        // makes an enemy, and gets the enemies in room23
+        enemies.add(new Enemy("blemmyes", 5,
+                new MeleeWeapon("club", "a wooden club", "This club can smash", 4, 6),
+                mapOfGame.getMap()[22], true));
+
+        // makes an enemy, and gets the enemies in room16
+        enemies.add(new Enemy("giant", 5,
+                new MeleeWeapon("axe", "a bloody axe", "This axe can behead someone in one blow", 10, 10),
+                mapOfGame.getMap()[15], false));
+
+        // makes an enemy, and gets the enemies in room7
+        enemies.add(new Enemy("centaur", 5,
+                new MeleeWeapon("dagger", "thin yet strong dagger", "This dagger might seem flimsy but it's not", 10, 10),
+                mapOfGame.getMap()[6], false));
 
         enemiesInRoom = getEnemiesInCurrentRoom();
     }
