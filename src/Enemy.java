@@ -28,6 +28,7 @@ public class Enemy extends Character{
         return super.takeDamage(damage);
     }
 
+    // has a chance to move the currentroom to that of the players
     public void follow(String userInput){
         // get the chance for the enemy to follow
         double chance = Math.random();
@@ -42,8 +43,10 @@ public class Enemy extends Character{
         }
     }
 
+    // spew all the items in the enemys inventory all over the room
     public void die(){
-        currentRoom.addItem(equippedWeapon);
+        if(equippedWeapon != null) currentRoom.addItem(equippedWeapon);
+        if(equippedShield != null) currentRoom.addItem(equippedShield);
         for (Item item: inventory) {
             currentRoom.addItem(item);
         }
