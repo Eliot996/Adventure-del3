@@ -134,6 +134,7 @@ public class Map {
 
 
         //Added different items to different rooms
+        map[0].addItem(new MeleeWeapon("club", "a wooden club", "a sturdy wooden club, it might be made from oak, from the looks of it", 5, 5));
         map[0].addItem(new Food("apple", "red apple", "An apple a day, keeps the doctor away \uD83D\uDE09", 0, 2));
         map[0].addItem(new Food("almonds", "a handful of almonds", "A bit of fuel to to keep you going", 0, 3));
         map[0].addItem(new Food("apple", "green apple", "An apple a day, might not keep the doctor away", 0, -5));
